@@ -13,8 +13,8 @@ const handler = async (r, res) => {
       start: new Date(r?.body.start),
       end: new Date(r?.body.end),
       max_pax: parseInt(r.body.max_pax),
-      standing_json: r.body.standing_json && JSON.parse(r.body.standing_json),
-      group_json: r.body.group_json && JSON.parse(r.body.group_json),
+      ...(r.body.standing_json?.length > 0 && { standing_json: JSON.parse(r.body.standing_json) }),
+      ...(r.body.group_json?.length > 0 && { group_json: JSON.parse(r.body.group_json) }),
     });
 
     res.status(200).json(prisma.responseFilter(data));

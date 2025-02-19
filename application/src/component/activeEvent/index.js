@@ -52,10 +52,10 @@ export default function App(props) {
       >
         <UI.Col>
           <Slider data={events?.data[activeEvent]?.attachment} />
-          <Standing data={events?.data[activeEvent]} />
+          {events?.data[activeEvent]?.standing_json?.length > 0 && <Standing data={events?.data[activeEvent]} />}
           <Live data={events?.data[activeEvent]} />
           <Rules data={events?.data[activeEvent]?.rules} />
-          <Groups data={events?.data[activeEvent]} />
+          {events?.data[activeEvent]?.group_json?.length > 0 && <Groups data={events?.data[activeEvent]} />}
           <Footer data={events?.data[activeEvent]} />
         </UI.Col>
       </UI.Col>

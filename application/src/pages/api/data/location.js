@@ -35,5 +35,5 @@ const handler = async (r, res) => {
   });
 };
 
-// export default handler;
-export default serverMiddleware(handler);
+export default handler;
+// export default serverMiddleware(handler);

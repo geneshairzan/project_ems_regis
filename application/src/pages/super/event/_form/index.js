@@ -25,6 +25,7 @@ export default function App({ refdata }) {
           rules: refdata.rules || [""],
           tanggal_options: refdata.tanggal_options || [""],
           standing_json: JSON.stringify(refdata.standing_json),
+          group_json: JSON.stringify(refdata.group_json),
         }
       : {
           standing_json: [],

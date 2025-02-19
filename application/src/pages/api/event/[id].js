@@ -2,7 +2,7 @@ import prisma, { extendPrisma } from "@/component/gh/helper/orm";
 import serverMiddleware from "@/component/middleware/server";
 
 async function handler(r, res) {
-  !r?.auth && res.status(401).json({ msg: "un autorized" });
+  // !r?.auth && res.status(401).json({ msg: "un autorized" });
 
   let model = "event";
 

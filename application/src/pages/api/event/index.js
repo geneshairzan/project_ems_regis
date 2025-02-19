@@ -4,9 +4,9 @@ import { getUser } from "@gh/helper/encryption";
 import authMiddleware from "@/component/middleware/server/auth";
 
 const handler = async (r, res) => {
-  // !r?.auth && res.status(401).json({ msg: "un autorized" });
-
   if (r.method == "POST") {
+    if (!r?.auth) return res.status(401).json({ msg: "un autorized" });
+
     let data;
     data = await prisma.set("event", {
       ...r?.body,
@@ -19,6 +19,8 @@ const handler = async (r, res) => {
 
     res.status(200).json(prisma.responseFilter(data));
   } else if (r.method == "DELETE") {
+    if (!r?.auth) return res.status(401).json({ msg: "un autorized" });
+
     let data = await prisma.update("event", r?.body);
     res.status(200).json(prisma.responseFilter(data));
 

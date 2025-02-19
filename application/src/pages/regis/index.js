@@ -16,7 +16,7 @@ export default function App(props) {
 }
 
 function FormRegis({ id }) {
-  let event = useFetch({ url: `/event/${id}` });
+  let event = useFetch({ url: `event/${id}` });
   let loc = useFetch({ url: `data/location?_token=223344!!` });
 
   return (

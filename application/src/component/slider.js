@@ -46,7 +46,7 @@ export default function App({ data }) {
           pagination: false,
         }}
       >
-        {data.map((d, ix) => (
+        {data?.map((d, ix) => (
           <SplideSlide
             key={ix}
             style={{
@@ -90,7 +90,7 @@ export default function App({ data }) {
           justifyContent: "center",
         }}
       >
-        {data.map((_, ix) => (
+        {data?.map((_, ix) => (
           <UI.Col
             key={ix}
             onClick={() => splideRef.current?.go(ix)} // Change slide on click

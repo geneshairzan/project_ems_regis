@@ -4,7 +4,7 @@ import { getUser } from "@gh/helper/encryption";
 import authMiddleware from "@/component/middleware/server/auth";
 
 const handler = async (r, res) => {
-  !r?.auth && res.status(401).json({ msg: "un autorized" });
+  // !r?.auth && res.status(401).json({ msg: "un autorized" });
 
   if (r.method == "POST") {
     let data;

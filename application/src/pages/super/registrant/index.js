@@ -79,7 +79,7 @@ function Preview({ data, event, ranks, loc, onClose }) {
       <PreviewItem label="Attachement" value={""} />
       <UI.Row gap={2} overflow="auto" pb={2}>
         <img
-          src={`/api/file/registrant/${data.id}_photo.png`}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_photo.png`}
           style={{
             height: 180,
             width: "auto",
@@ -88,7 +88,7 @@ function Preview({ data, event, ranks, loc, onClose }) {
         />
 
         <img
-          src={`/api/file/registrant/${data.id}_id.png`}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_id.png`}
           style={{
             height: 180,
             width: "auto",
@@ -97,7 +97,7 @@ function Preview({ data, event, ranks, loc, onClose }) {
         />
 
         <img
-          src={`/api/file/registrant/${data.id}_ss.png`}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_ss.png`}
           style={{
             height: 180,
             width: "auto",

@@ -70,7 +70,7 @@ export default function InputImage({ onChange, error, helperText, sx, noLabel = 
 function Preview({ value, onDelete }) {
   function getLink(d) {
     if (d?.created_at) {
-      return `/api/file/${d.ownerType}/${d.path}`;
+      return `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/${d.ownerType}/${d.path}`;
     } else {
       return URL.createObjectURL(d?._new);
     }

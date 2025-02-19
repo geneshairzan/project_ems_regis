@@ -32,7 +32,7 @@ export default function App(props) {
     if (r.query?.id && events?.data?.length) setactiveEvent(events?.data?.findIndex((d) => d.id == r.query.id));
   }, [r.query, events.data]);
 
-  if (!events.data?.id || activeEvent == -1) return;
+  if (!events.data || activeEvent == -1) return;
 
   return (
     <UI.Col

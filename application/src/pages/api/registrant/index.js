@@ -11,7 +11,7 @@ export const config = {
 };
 
 const handler = async (r, res) => {
-  !r?.auth && res.status(401).json({ msg: "un autorized" });
+  // !r?.auth && res.status(401).json({ msg: "un autorized" });
 
   let raw = await parse(r);
 

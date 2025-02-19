@@ -76,7 +76,7 @@ export default function App({ data, height = 640 }) {
             }}
           >
             <img
-              src={`/api/file/event/${d?.img?.path}`}
+              src={`${process.env.NEXT_PUBLIC_APP_URL}/api/file/event/${d?.img?.path}`}
               alt=""
               style={{
                 height: "100%",

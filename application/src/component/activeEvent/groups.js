@@ -81,7 +81,7 @@ export default function App({ data }) {
 }
 
 function RenderGroup({ data }) {
-  if (!data) return;
+  if (!data?.length) return;
   return (
     <UI.Row
       sx={{
@@ -122,7 +122,7 @@ function GroupBlock({ data }) {
       >
         {data.groupName}
       </UI.Col>
-      {data?.member.map((d, ix) => (
+      {data?.member?.map((d, ix) => (
         <UI.Col
           key={ix}
           sx={{

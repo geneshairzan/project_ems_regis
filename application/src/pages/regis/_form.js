@@ -153,7 +153,7 @@ export default function App({ refdata, loc, event }) {
         </UI.Row>
       </UI.Col>
 
-      {!refdata.id && (
+      {!refdata?.id && (
         <UI.Col center>
           <UI.Col
             center

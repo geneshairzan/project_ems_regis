@@ -9,10 +9,10 @@ module.exports = {
       // // script: "C:\\Program Files\\nodejs\\npm",
       // args: "run dev",
 
-      name: "project_ems",
+      name: "project_ems_regis",
       // script: "npm",
       script: "node_modules/next/dist/bin/next",
-      args: "start -p 7003",
+      args: "start -p 7004",
       watch: true,
       // watch_delay: 1000,
       // ignore_watch: ["node_modules"],

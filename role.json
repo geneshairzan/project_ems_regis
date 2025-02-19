@@ -1,0 +1,37 @@
+[
+  {
+    "id": 7,
+    "name": "CREW",
+    "color": "#666666"
+  },
+  {
+    "id": 9,
+    "name": "VIP CREW",
+    "color": "#666666"
+  },
+  {
+    "id": 10,
+    "name": "MOONTON",
+    "color": "#0000fe"
+  },
+  {
+    "id": 13,
+    "name": "KOL",
+    "color": "#00ffff"
+  },
+  {
+    "id": 14,
+    "name": " VIP ",
+    "color": "#ffff00"
+  },
+  {
+    "id": 15,
+    "name": "EXHIBITOR",
+    "color": "#387524"
+  },
+  {
+    "id": 16,
+    "name": "PERFORMER",
+    "color": "#9900ef"
+  }
+]

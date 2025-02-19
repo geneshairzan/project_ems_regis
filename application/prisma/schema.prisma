@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Status {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  User User[]
+}
+
+model UserType {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  User User[]
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+}
+
+model UserRole {
+  id    Int     @id @default(autoincrement())
+  name  String
+  color String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+  User       User[]
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String? @unique
+  name     String?
+  password String?
+
+  phone   String?
+  company String?
+  img     String?
+  title   String?
+
+  type_id   Int? @default(1)
+  role_id   Int?
+  status_id Int  @default(1)
+
+  token      String?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  status Status    @relation(fields: [status_id], references: [id])
+  type   UserType? @relation(fields: [type_id], references: [id])
+  role   UserRole? @relation(fields: [role_id], references: [id])
+}
+
+model Event {
+  id       String  @id @default(cuid())
+  name     String?
+  desc     String?
+  live_url String?
+  rules    Json?
+
+  standing_json Json?
+  group_json    Json?
+  video_path    String?
+
+  tanggal_options Json?
+
+  start   DateTime?
+  end     DateTime?
+  max_pax Int?
+
+  created_at DateTime     @default(now())
+  updated_at DateTime     @default(now()) @updatedAt
+  deleted_at DateTime?
+  Registrant Registrant[]
+}
+
+model Attachment {
+  id        Int    @id @default(autoincrement())
+  name      String
+  path      String
+  ownerId   String
+  ownerType String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+}
+
+model Registrant {
+  id String @id @default(cuid())
+
+  event_id        String
+  name            String?
+  dob             DateTime?
+  kabupaten_id    String?
+  nickname        String?
+  ingame_id       String?
+  no_hp           String?
+  photo_path      String?
+  photo_id_path   String?
+  photo_ss_path   String?
+  rank            String?
+  tournament_date Int
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  event Event @relation(fields: [event_id], references: [id])
+}

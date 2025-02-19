@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@gh/*": ["./src/component/gh/*"],
+      "@context": ["./src/component/context/index.js"],
+      "@context/app": ["./src/component/context/index.js"],
+      "@context/*": ["./src/component/context/*"],
+      "@storage/*": ["./storage/*"],
+      "@model/*": ["./src/model/*"],
+      "@smart/*": ["./src/component/app/smart/*"]
+    }
+  }
+}

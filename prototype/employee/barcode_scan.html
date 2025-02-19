@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>EMS Scan</title>
+        <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+    </head>
+    <body class="bg-gray-50 bg-gray-500">
+        <nav class="border-gray-200 bg-gray-900">
+            <div
+                class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+            >
+                <a
+                    href="https://met.events/"
+                    class="flex items-center space-x-3 rtl:space-x-reverse"
+                >
+                    <img
+                        src="https://met.events/wp-content/themes/mineski/assets/img/met-logo.png"
+                        class="h-8"
+                        alt="MET Logo"
+                    />
+                    <span
+                        class="self-center text-2xl font-semibold whitespace-nowrap text-white"
+                    ></span>
+                </a>
+                <button
+                    data-collapse-toggle="navbar-default"
+                    type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+                    aria-controls="navbar-default"
+                    aria-expanded="false"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 17 14"
+                    >
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15"
+                        />
+                    </svg>
+                </button>
+                <div
+                    class="hidden w-full md:block md:w-auto"
+                    id="navbar-default"
+                >
+                    <ul
+                        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700"
+                    >
+                      
+                        <li>
+                            <a
+                                href="/employee/loggedin_homepage.html"
+                                class="block py-2 px-3 text-blue bg-white-400 rounded md:bg-transparent md:text-blue-400 md:p-0 text-blue md:text-blue-400"
+                                aria-current="page"
+                                >Home</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/index.html"
+                                class="block py-2 px-3 text-white bg-white-700 rounded md:bg-transparent md:text-white-700 md:p-0 text-white md:text-white-500"
+                                aria-current="page"
+                                >Logout</a
+                            >
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div
+            class="flex flex-col items-center justify-center mt-10"
+        >
+            <div
+                class="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700"
+            >
+                <div class="max-w-md mx-auto text-center px-4 sm:px-8 py-10 rounded-xl shadow">
+                    <header class="mb-8">
+                        <h1 class="text-2xl text-white font-bold mb-1">Scan your ID Card Here</h1>
+                    </header>
+                    <div id="reader" width="600px"></div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- drawer init and toggle -->
+<div class="text-center hidden">
+    <button id="btn-drawer" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-swipe" data-drawer-show="drawer-swipe" data-drawer-placement="bottom" data-drawer-edge="true" data-drawer-edge-offset="bottom-[0px]" aria-controls="drawer-swipe">
+    Show swipeable drawer
+    </button>
+ </div>
+ 
+ <!-- drawer component -->
+ <div id="drawer-swipe" class="fixed z-40 w-full overflow-y-auto bg-white border-t border-gray-200 rounded-t-lg dark:border-gray-700 dark:bg-gray-800 transition-transform bottom-0 left-0 right-0 translate-y-full bottom-[0px]" tabindex="-1" aria-labelledby="drawer-swipe-label">
+    <div class="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700" data-drawer-toggle="drawer-swipe">
+       <span class="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+       <h5 id="drawer-swipe-label" class="inline-flex items-center text-base text-gray-500 dark:text-gray-400 font-medium"><svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+     <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10ZM17 13h-2v-2a1 1 0 0 0-2 0v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 0 0 2 0v-2h2a1 1 0 0 0 0-2Z"/>
+   </svg>Scanning Result</h5>
+    </div>
+    <div class="w-full  gap-12 p-12  flex justify-center items-center text-center">
+        <div class="flex flex-col items-center pb-10">
+            <div class="flex items-center mt-4 md:mt-6 mb-10">
+                <img class="w-10 h-10 mr-2" src="/employee/x.png" alt="not allowed"/>
+                <h5 class="mb-1 text-xl font-medium text-red-500">Not Allowed</h5>
+            </div>
+            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Windows_10_Default_Profile_Picture.svg" alt="Bonnie image"/>
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+            <span class="text-sm text-gray-900 dark:text-gray-400">Stage Manager</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">bonnie.green@aratekno.com</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">+62821229282</span>
+        </div>
+    </div>
+ </div>
+ 
+        <script>
+            const html5QrCode = new Html5Qrcode("reader");
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                document.getElementById("btn-drawer").click();
+            };
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+            
+            // If you want to prefer back camera
+            html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+
+        </script>
+    </body>
+</html>

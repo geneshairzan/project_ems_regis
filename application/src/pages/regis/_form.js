@@ -147,7 +147,7 @@ export default function App({ refdata, loc, event }) {
 
         <Form.Select
           options={event?.tanggal_options?.map((d, ix) => ({
-            id: ix + 1,
+            id: ix,
             name: d,
           }))}
           label="Tournament Date"

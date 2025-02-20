@@ -57,7 +57,10 @@ function MainApp({ eid }) {
   let model = "registrant";
 
   if (!event.data || !registrant.data) return;
-  console.log(registrant?.data);
+
+  function exportMap(d) {
+    return { ...d, status: d.status == 0 ? "Waiting" : "Approved", tournament_date: event?.data?.tanggal_options[parseInt(d.tournament_date)] };
+  }
 
   return (
     <UI.Col px={{ xs: 2, md: 5 }} width="100%" flex={1}>
@@ -69,7 +72,10 @@ function MainApp({ eid }) {
       <UI.IconButton name="arrow_back" color="black" size={64} onClick={r.back} />
       <UI.Row spaced>
         <UI.Text variant="h2">{event?.data?.name}</UI.Text>
-        <UI.Button onClick={() => exportToCSV(registrant?.data, ["name", "ingame_id", "email", "no_hp", "tournament_date", "status"])} variant="outlined">
+        <UI.Button
+          onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status"])}
+          variant="outlined"
+        >
           Export CSV
         </UI.Button>
       </UI.Row>

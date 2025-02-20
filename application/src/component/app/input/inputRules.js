@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
 import Form from "@gh/form";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
+import Editor from "react-simple-wysiwyg";
 
 export default function App({ value, onChange }) {
   function handleChange(v, ix) {
@@ -29,7 +30,7 @@ export default function App({ value, onChange }) {
               position: "relative",
             }}
           >
-            <Form.Text rows={3} multiline value={d} onChange={(e) => handleChange(e.target.value, ix)} />
+            <Editor value={d} onChange={(e) => handleChange(e.target.value, ix)} containerProps={{ style: { minHeight: 200 } }} />
             <UI.Col
               onClick={() => handleDelete(ix)}
               sx={{

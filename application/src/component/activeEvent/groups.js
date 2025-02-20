@@ -27,19 +27,24 @@ export default function App({ data }) {
         }}
         py="100px"
       >
-        <UI.Text variant="h2" color="white" bold>
-          GROUPS
-        </UI.Text>
-        <UI.Col
-          sx={{
-            maxWidth: 1440,
-            minHeight: 600,
-            width: "100%",
-            pt: "38px",
-          }}
-        >
-          <RenderGroup data={data?.group_json} />
-        </UI.Col>
+        {data?.group_json && (
+          <>
+            <UI.Text variant="h2" color="white" bold>
+              GROUPS
+            </UI.Text>
+            <UI.Col
+              sx={{
+                maxWidth: 1440,
+                minHeight: 600,
+                width: "100%",
+                pt: "38px",
+              }}
+            >
+              <RenderGroup data={data?.group_json} />
+            </UI.Col>
+          </>
+        )}
+
         <UI.Col id="REGISTRATION">
           <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>
         </UI.Col>
@@ -53,9 +58,7 @@ function RenderGroup({ data }) {
   const handleChange = (event, value) => setPage(value);
   const startIndex = (page - 1) * itemsPerPage;
 
-  let dataPrep = data.map((d, ix) => ({ ...d, no: ix + 1 })).sort((a, b) => (a.point < b.point ? 1 : -1));
-
-  if (!data?.length) return;
+  let dataPrep = data?.length ? data?.map((d, ix) => ({ ...d, no: ix + 1 })).sort((a, b) => (a.point < b.point ? 1 : -1)) : [];
 
   return (
     <>
@@ -66,9 +69,7 @@ function RenderGroup({ data }) {
           justifyContent: "center",
         }}
       >
-        {dataPrep?.slice(startIndex, startIndex + itemsPerPage)?.map((d, ix) => (
-          <GroupBlock key={ix} data={d} />
-        ))}
+        {dataPrep?.length > 0 && dataPrep?.slice(startIndex, startIndex + itemsPerPage)?.map((d, ix) => <GroupBlock key={ix} data={d} />)}
       </UI.Row>
       <UI.Col center py={2}>
         <Pagination

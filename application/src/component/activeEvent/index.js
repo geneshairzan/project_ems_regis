@@ -55,7 +55,7 @@ export default function App(props) {
           {events?.data[activeEvent]?.standing_json?.length > 0 && <Standing data={events?.data[activeEvent]} />}
           <Live data={events?.data[activeEvent]} isMobile={isMobile} />
           <Rules data={events?.data[activeEvent]?.rules} />
-          {events?.data[activeEvent]?.group_json?.length > 0 && <Groups data={events?.data[activeEvent]} />}
+          <Groups data={events?.data?.[activeEvent] || []} />
         </UI.Col>
       </UI.Col>
     </UI.Col>

@@ -70,7 +70,7 @@ export default function App({ refdata, loc, event }) {
       !formik.values?.game_id ||
       !formik.values?.email ||
       !formik.values?.photo_ss_path ||
-      !formik.values?.tournament_date ||
+      !Boolean(parseInt(formik.values?.tournament_date) >= 0) ||
       !formik.values?.tc
     )
       return false;

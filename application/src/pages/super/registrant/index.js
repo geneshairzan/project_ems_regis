@@ -74,7 +74,10 @@ function MainApp({ eid }) {
         </UI.Button>
       </UI.Row>
       <UI.Text variant="h4">Registrant</UI.Text>
-
+      {/* <RowItem header data={["Name", "Email", "Image", "In Game ID", "Phone number", "status"]} /> */}
+      {/* {registrant?.data?.map((d) => (
+        <RowItem onClick={() => setonDetail(d)} data={[d.name, d.email, "images", d.ingame_id, d.no_hp, d.status == 0 ? "waiting" : "approved"]} />
+      ))} */}
       <Datatables
         name="model"
         NewElement={null}
@@ -84,6 +87,42 @@ function MainApp({ eid }) {
         options={{ rowEvenColor: "#ffffff", rowOddColor: "#ffffff" }}
       />
     </UI.Col>
+  );
+}
+
+function RowItem({ data, header = false, onClick }) {
+  return (
+    <UI.Row
+      onClick={onClick}
+      sx={{
+        color: header ? "white" : "black",
+        height: 48,
+        borderBottom: "1px solid lightgrey",
+        alignItems: "center",
+        ...(header && {
+          bgcolor: "primary.main",
+        }),
+      }}
+    >
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[0]}</UI.Text>
+      </UI.Col>
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[1]}</UI.Text>
+      </UI.Col>
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[2]}</UI.Text>
+      </UI.Col>
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[3]}</UI.Text>
+      </UI.Col>
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[4]}</UI.Text>
+      </UI.Col>
+      <UI.Col px={1} flex={1}>
+        <UI.Text variant="body1">{data[5]}</UI.Text>
+      </UI.Col>
+    </UI.Row>
   );
 }
 
@@ -120,12 +159,12 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
       </UI.Row>
       <PreviewItem label="Satus" value={data?.status == "1" ? "Approved" : "Waiting"} />
       <PreviewItem label="Nama Lengkap" value={data?.name} />
-      <PreviewItem label="Tanggal Lahir" value={h.date.format(data.dob)} />
-      <PreviewItem label="Lokasi" value={loc.kabupaten.find((d) => d.id == data.kabupaten_id)?.name} />
-      <PreviewItem label="Nick Name" value={data?.nickname} />
+      {/* <PreviewItem label="Tanggal Lahir" value={h.date.format(data.dob)} /> */}
+      {/* <PreviewItem label="Lokasi" value={loc.kabupaten.find((d) => d.id == data.kabupaten_id)?.name} /> */}
+      {/* <PreviewItem label="Nick Name" value={data?.nickname} /> */}
       <PreviewItem label="Ingame ID" value={data?.ingame_id} />
-      <PreviewItem label="No. HP/WA" value={data?.no_hp} />
-      <PreviewItem label="Rank" value={ranks[parseInt(data.rank)].name || "dasdasd"} />
+      <PreviewItemLink label="No. HP/WA" value={data?.no_hp} />
+      {/* <PreviewItem label="Rank" value={ranks[parseInt(data.rank)].name || "dasdasd"} /> */}
       <PreviewItem label="Tournament Date" value={event?.tanggal_options[parseInt(data.tournament_date)] || "dasdasd"} />
       <PreviewItem label="Attachement" value={""} />
 
@@ -165,6 +204,21 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
         <UI.Button onClick={handleApproved}>{data.status == 0 ? "Approved" : "Cancel Approval"}</UI.Button>
       </UI.Col>
     </UI.Col>
+  );
+}
+
+function PreviewItemLink({ label, value }) {
+  return (
+    <a href={`http://wa.me/62${value}`} target="_blank">
+      <UI.Row>
+        <UI.Text variant="body1" width={200} bold>
+          {label}
+        </UI.Text>
+        <UI.Text variant="body1" color="primary.dark">
+          wa.me/62{value}
+        </UI.Text>
+      </UI.Row>
+    </a>
   );
 }
 

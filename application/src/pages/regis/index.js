@@ -16,6 +16,8 @@ export default function App(props) {
 }
 
 function FormRegis({ id }) {
+  const { r } = React.useContext(Context);
+
   let event = useFetch({ url: `event/${id}` });
   let loc = useFetch({ url: `data/location?_token=223344!!` });
 
@@ -38,9 +40,24 @@ function FormRegis({ id }) {
           maxWidth: "100vw",
         }}
       >
-        <UI.Text variant="h2" bold py={"50px"}>
-          REGISTRATIONS
-        </UI.Text>
+        <UI.Row
+          width="100%"
+          sx={{
+            maxWidth: {
+              xs: "calc(100vw - 36px)",
+              md: 1080,
+            },
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <UI.IconButton size={64} name="arrow_back" onClick={r.back} color="black" />
+          <UI.Text variant="h2" bold py={"50px"}>
+            REGISTRATIONS
+          </UI.Text>
+          <UI.IconButton size={64} name="" onClick={r.back} color="black" />
+        </UI.Row>
+
         <UI.Col
           center
           sx={{

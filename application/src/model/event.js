@@ -8,7 +8,7 @@ export const event = {
     { name: "desc", label: "Description", w: "auto" },
     { name: "start", label: "start date", type: "date", w: 160 },
     { name: "end", label: "end date", type: "date", w: 160 },
-    { name: "area_link", label: "area", type: "link", w: 160 },
+    // { name: "area_link", label: "area", type: "link", w: 160 },
   ],
   datamap: (d) => {
     return {

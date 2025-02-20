@@ -1,14 +1,6 @@
 import Form from "../index";
 
-export default function FormRenderer({
-  d,
-  formik,
-  disableMultiline = false,
-  disableLabel = false,
-  onChange,
-  value,
-  grow = 0,
-}) {
+export default function FormRenderer({ d, formik, disableMultiline = false, disableLabel = false, onChange, value, grow = 0 }) {
   function labelRender(raw) {
     return raw.replaceAll("_id", " ").replaceAll("_", " ");
   }
@@ -58,9 +50,7 @@ export default function FormRenderer({
           name={d.name}
           value={formik?.values[d.name] || value?.[d.name]}
           onChange={(v) => {
-            value
-              ? onChange({ target: { value: v, name: d.name } })
-              : formik?.setFieldValue(d.name, parseInt(v?.target?.value));
+            value ? onChange({ target: { value: v, name: d.name } }) : formik?.setFieldValue(d.name, parseInt(v?.target?.value));
           }}
         />
       )}

@@ -1,6 +1,7 @@
 import UI from "@gh/ui";
 import h from "@gh/helper";
 import Link from "next/link";
+import ImgRender from "./imgRender";
 
 const config = {
   firstColWidth: 300,
@@ -22,6 +23,8 @@ export default function RenderChild({ type, value, width, El, row }) {
         <UI.TextHTML data={value} />
       </UI.Col>
     );
+
+  if (type == "images") return <ImgRender data={value} />;
 
   if (type == "elipsis")
     return (

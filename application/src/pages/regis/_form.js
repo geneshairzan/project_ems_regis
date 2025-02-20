@@ -9,6 +9,7 @@ import Context from "@context";
 import MainButton from "@/component/app/mainButton";
 
 export default function App({ refdata, loc, event }) {
+  const [error, setError] = useState(false);
   const { r } = React.useContext(Context);
   let photoinput = [
     {
@@ -57,15 +58,20 @@ export default function App({ refdata, loc, event }) {
     },
   });
 
+  function emailCheck() {
+    const isValid = /\S+@\S+\.\S+/.test(formik.values.email); // Simple email regex
+    setError(!isValid);
+  }
+
   function isValid() {
     if (
       !formik.values?.name ||
       !formik.values?.hp ||
+      !formik.values?.game_id ||
       !formik.values?.email ||
       !formik.values?.photo_ss_path ||
       !formik.values?.tournament_date ||
-      !formik.values?.tc ||
-      !formik.values?.sk
+      !formik.values?.tc
     )
       return false;
     return true;
@@ -92,7 +98,14 @@ export default function App({ refdata, loc, event }) {
         <Form.Text name="hp" prefix="+62" value={formik.values.hp} onChange={(e) => formik.setFieldValue("hp", e.target.value.replace(/\D/g, ""))} />
 
         <Label l="Email" />
-        <Form.Text name="email" value={formik.values.email} onChange={formik.handleChange} />
+        <Form.Text
+          error={error}
+          helperText={error && "Invalid Email Address"}
+          name="email"
+          onBlur={emailCheck}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
 
         <Label l="UID" />
         <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} />
@@ -134,7 +147,7 @@ export default function App({ refdata, loc, event }) {
 
         <Form.Select
           options={event?.tanggal_options?.map((d, ix) => ({
-            id: ix,
+            id: ix + 1,
             name: d,
           }))}
           label="Tournament Date"
@@ -154,34 +167,17 @@ export default function App({ refdata, loc, event }) {
           my: "24px",
         }}
       >
-        <UI.Row>
-          <Form.Checkbox value={formik.values.sk} onChange={() => formik.setFieldValue("sk", !formik.values.sk)} />
-
-          <UI.Text variant="body1">
-            Lorem ipsum dolor sit amet consectetur. Suspendisse varius urna nunc nec lacinia <br />
-            porttitor hendrerit sagittis.
-            <span
-              style={{
-                color: "#0066ff",
-                textDecoration: "underline",
-              }}
-            >
-              Syarat & Ketentuan.
-            </span>
-          </UI.Text>
-        </UI.Row>
-        <UI.Row>
+        <UI.Row alignItems="center">
           <Form.Checkbox value={formik.values.tc} onChange={() => formik.setFieldValue("tc", !formik.values.tc)} />
           <UI.Text variant="body1">
-            aaa Lorem ipsum dolor sit amet consectetur. Suspendisse varius urna nunc nec lacinia <br />
-            porttitor hendrerit sagittis.
+            saya setuju dengan syarat dan ketentuan tournament
             <span
               style={{
                 color: "#0066ff",
                 textDecoration: "underline",
               }}
             >
-              Syarat & Ketentuan.
+              {` Syarat & Ketentuan.`}
             </span>
           </UI.Text>
         </UI.Row>

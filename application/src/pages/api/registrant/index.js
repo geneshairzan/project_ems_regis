@@ -21,6 +21,7 @@ const handler = async (r, res) => {
       // id: "cm77hmvs3000b5qrhmh7hw1yl",
       event_id: raw.event_id,
       name: raw.name,
+      email: raw.email,
       // dob: new Date(raw.dob),
       // kabupaten_id: raw.kabupaten_id,
       nickname: raw.name_nick,

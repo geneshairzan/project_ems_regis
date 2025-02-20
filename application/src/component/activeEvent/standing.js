@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
+import Pagination from "@mui/material/Pagination";
+
+const itemsPerPage = 20; // Number of items per page
 
 export default function App({ data }) {
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => setPage(value);
+  const startIndex = (page - 1) * itemsPerPage;
+
+  let dataPrep = data?.standing_json.map((d, ix) => ({ ...d, no: ix + 1 })).sort((a, b) => (a.point < b.point ? 1 : -1));
+
   return (
     <UI.Col
       id="STANDINGS"
@@ -36,16 +45,23 @@ export default function App({ data }) {
         >
           <RowItem d={{ no: "#", name: "Name", point: "Point", wl: "Match (W-L)", bgcolor: "#35353d", color: "white" }} />
           {data?.standing_json &&
-            data?.standing_json?.map((d, ix) => (
+            dataPrep?.slice(startIndex, startIndex + itemsPerPage)?.map((d, ix) => (
               <RowItem
                 d={{
                   ...d,
-                  no: ix + 1,
                 }}
                 key={ix}
-                lastItem={ix == data?.standing_json?.length - 1}
+                lastItem={d.no == data?.standing_json?.length || ix == itemsPerPage - 1}
               />
             ))}
+
+          <UI.Col center pt={2}>
+            <Pagination
+              count={Math.ceil(data?.standing_json?.length / itemsPerPage)} // Total pages
+              page={page}
+              onChange={handleChange}
+            />
+          </UI.Col>
         </UI.Col>
 
         {/* <div dangerouslySetInnerHTML={{ __html: data?.standing_json }} /> */}

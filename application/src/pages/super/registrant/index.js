@@ -6,8 +6,17 @@ import Context from "@context";
 import Datatables from "@gh/dataTables";
 import { getInfo } from "@/model";
 
-export default function App(props) {
+export default function RegistrantList(params) {
   const { r } = React.useContext(Context);
+
+  if (!r.query.eid) return;
+
+  return <MainApp eid={r.query.eid} />;
+}
+
+function MainApp({ eid }) {
+  const { r } = React.useContext(Context);
+
   let ranks = [
     { id: 1, name: "Legend" },
     { id: 2, name: "Mytic" },
@@ -15,11 +24,9 @@ export default function App(props) {
   ];
   let loc = useFetch({ url: `data/location?_token=223344!!` });
 
-  if (!r.query.eid) return;
-
   const [onDetail, setonDetail] = useState();
-  const event = useFetch({ url: `event/${r.query.eid}` });
-  const registrant = useFetch({ url: `registrant?eid=${r.query.eid}` });
+  const event = useFetch({ url: `event/${eid}` });
+  const registrant = useFetch({ url: `registrant?eid=${eid}` });
   let model = "registrant";
 
   if (!event.data || !registrant.data) return;
@@ -28,7 +35,7 @@ export default function App(props) {
     <UI.Col px={{ xs: 2, md: 5 }} width="100%" flex={1}>
       {onDetail && (
         <UI.Modal open onClose={() => setonDetail()}>
-          <Preview event={event.data} data={onDetail} onClose={() => setonDetail()} ranks={ranks} loc={loc.data} />
+          <Preview event={event.data} data={onDetail} onReload={registrant.reload} onClose={() => setonDetail()} ranks={ranks} loc={loc.data} />
         </UI.Modal>
       )}
       <UI.IconButton name="arrow_back" color="black" size={64} onClick={r.back} />
@@ -49,7 +56,19 @@ export default function App(props) {
   );
 }
 
-function Preview({ data, event, ranks, loc, onClose }) {
+function Preview({ data, event, ranks, loc, onClose, onReload }) {
+  async function handleApproved() {
+    let res = await fetcher({
+      url: "registrant/status",
+      method: "post",
+      data: {
+        id: data?.id,
+        status: data?.status == 0 ? 1 : 0,
+      },
+    });
+    onClose();
+    onReload();
+  }
   return (
     <UI.Col
       width="100%"
@@ -68,6 +87,7 @@ function Preview({ data, event, ranks, loc, onClose }) {
         </UI.Text>
         <UI.IconButton name="close" color="error.main" onClick={onClose} />
       </UI.Row>
+      <PreviewItem label="Satus" value={data?.status == "1" ? "Approved" : "Waiting"} />
       <PreviewItem label="Nama Lengkap" value={data?.name} />
       <PreviewItem label="Tanggal Lahir" value={h.date.format(data.dob)} />
       <PreviewItem label="Lokasi" value={loc.kabupaten.find((d) => d.id == data.kabupaten_id)?.name} />
@@ -77,8 +97,9 @@ function Preview({ data, event, ranks, loc, onClose }) {
       <PreviewItem label="Rank" value={ranks[parseInt(data.rank)].name || "dasdasd"} />
       <PreviewItem label="Tournament Date" value={event?.tanggal_options[parseInt(data.tournament_date)] || "dasdasd"} />
       <PreviewItem label="Attachement" value={""} />
+
       <UI.Row gap={2} overflow="auto" pb={2}>
-        <img
+        {/* <img
           src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_photo.png`}
           style={{
             height: 180,
@@ -94,7 +115,7 @@ function Preview({ data, event, ranks, loc, onClose }) {
             width: "auto",
           }}
           alt=""
-        />
+        /> */}
 
         <img
           src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_ss.png`}
@@ -105,6 +126,13 @@ function Preview({ data, event, ranks, loc, onClose }) {
           alt=""
         />
       </UI.Row>
+
+      <UI.Col>
+        <UI.Text variant="body1" bold>
+          Actions
+        </UI.Text>
+        <UI.Button onClick={handleApproved}>{data.status == 0 ? "Approved" : "Cancel Approval"}</UI.Button>
+      </UI.Col>
     </UI.Col>
   );
 }

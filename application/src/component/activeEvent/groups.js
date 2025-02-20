@@ -3,9 +3,13 @@ import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 import Context from "@context";
 import MainButton from "@/component/app/mainButton";
+import Pagination from "@mui/material/Pagination";
+
+const itemsPerPage = 8; // Number of items per page
 
 export default function App({ data }) {
   const { r } = React.useContext(Context);
+
   return (
     <UI.Col
       id="GROUPS"
@@ -45,19 +49,44 @@ export default function App({ data }) {
 }
 
 function RenderGroup({ data }) {
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => setPage(value);
+  const startIndex = (page - 1) * itemsPerPage;
+
+  let dataPrep = data.map((d, ix) => ({ ...d, no: ix + 1 })).sort((a, b) => (a.point < b.point ? 1 : -1));
+
   if (!data?.length) return;
+
   return (
-    <UI.Row
-      sx={{
-        width: "100%",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
-      {data?.map((d, ix) => (
-        <GroupBlock key={ix} data={d} />
-      ))}
-    </UI.Row>
+    <>
+      <UI.Row
+        sx={{
+          width: "100%",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {dataPrep?.slice(startIndex, startIndex + itemsPerPage)?.map((d, ix) => (
+          <GroupBlock key={ix} data={d} />
+        ))}
+      </UI.Row>
+      <UI.Col center py={2}>
+        <Pagination
+          count={Math.ceil(data?.length / itemsPerPage)} // Total pages
+          page={page}
+          onChange={handleChange}
+          sx={{
+            "& .MuiPaginationItem-root": {
+              color: "white", // Change text color
+            },
+            "& .Mui-selected": {
+              backgroundColor: "#fb9c05", // Change selected page background color
+              color: "white", // Ensure selected text remains white
+            },
+          }}
+        />
+      </UI.Col>
+    </>
   );
 }
 

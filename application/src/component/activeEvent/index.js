@@ -39,10 +39,6 @@ export default function App(props) {
     <UI.Col
       sx={{
         width: "100vw",
-        // overflowY: "auto",
-        // overflowX: "hidden",
-        // posisition: "relative",
-        // height: "100vh",
       }}
     >
       <Header isMobile={isMobile} events={events.data} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />

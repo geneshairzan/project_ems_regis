@@ -26,6 +26,9 @@ export default function CustomStyles({ isDark = false, ...props }) {
 
     fwhite: {
       main: "#fff",
+      dark: "#fff",
+      contrastText: "#fff",
+
       contrastText: "#000",
     },
 

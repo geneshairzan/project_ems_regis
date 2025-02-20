@@ -9,57 +9,98 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
   const { r } = React.useContext(Context);
   let menus = ["STANDINGS", "LIVE", "RULES", "GROUPS", "REGISTRATION"];
   return (
-    <UI.Row
-      sx={{
-        width: "100%",
-        height: 80,
-        px: {
-          xs: 0,
-          md: 3,
-        },
-        background: "linear-gradient(180deg, #1A1B1F 50%, #1D1D3A 100%)",
-        justifyContent: "space-between",
-        position: "fixed",
-        top: 0,
-        zIndex: 9,
-        // opacity: 0.5,
-      }}
-    >
+    <>
       <UI.Row
-        flex={1}
         sx={{
-          height: "100%",
-          gap: 2,
-          pl: {
-            xs: 3.5,
-            md: 0,
+          width: "100%",
+          height: 80,
+          px: {
+            xs: 0,
+            md: 3,
           },
+          background: "linear-gradient(180deg, #1A1B1F 50%, #1D1D3A 100%)",
+          justifyContent: "space-between",
+          position: "fixed",
+          top: 0,
+          zIndex: 9,
+          // opacity: 0.5,
         }}
       >
-        <img
-          onClick={() => r.push("/")}
-          src="/assets/img/logo_mcgg.png"
-          alt=""
-          style={{
+        <UI.Row
+          flex={1}
+          sx={{
             height: "100%",
-            width: "auto",
-            objectFit: "contain",
+            gap: 2,
+            pl: {
+              xs: 3.5,
+              md: 0,
+            },
           }}
-        />
-        {selector && !isMobile && <MenuRender events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />}
-      </UI.Row>
+        >
+          <img
+            onClick={() => r.push("/")}
+            src="/assets/img/logo_mcgg.png"
+            alt=""
+            style={{
+              height: "100%",
+              width: "auto",
+              objectFit: "contain",
+            }}
+          />
+          {selector && !isMobile && <MenuRender events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />}
+        </UI.Row>
 
-      {menu && !isMobile && (
+        {menu && !isMobile && (
+          <UI.Row
+            sx={{
+              gap: 3,
+              alignItems: "center",
+            }}
+          >
+            {menus.map((d, ix) => (
+              <a href={`#${d}`} key={ix}>
+                <UI.Text
+                  variant="body1"
+                  color="white"
+                  style={{
+                    "&:hover": {
+                      cursor: "pointer",
+                      color: "#fb9c05",
+                    },
+                  }}
+                >
+                  {d}
+                </UI.Text>
+              </a>
+            ))}
+          </UI.Row>
+        )}
+        {isMobile && (
+          <UI.Row>
+            {/* <Drawer /> */}
+            <MenuRender w={240} events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />
+          </UI.Row>
+        )}
+      </UI.Row>
+      {isMobile && (
         <UI.Row
           sx={{
             gap: 3,
             alignItems: "center",
+            justifyContent: "space-between",
+            zIndex: 100,
+            position: "fixed",
+            top: 80,
+            bgcolor: "#1d1d38",
+            width: "100vw",
+            px: 2,
+            py: 1,
           }}
         >
           {menus.map((d, ix) => (
             <a href={`#${d}`} key={ix}>
               <UI.Text
-                variant="body1"
+                variant="body2"
                 color="white"
                 style={{
                   "&:hover": {
@@ -74,13 +115,7 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
           ))}
         </UI.Row>
       )}
-      {isMobile && (
-        <UI.Row>
-          {/* <Drawer /> */}
-          <MenuRender w={240} events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />
-        </UI.Row>
-      )}
-    </UI.Row>
+    </>
   );
 }
 

@@ -129,6 +129,7 @@ export default function App({ refdata, loc, event }) {
         /> */}
         <UI.Col center>
           <InputPhoto data={photoinput[2]} value={formik.values.photo_ss_path} onChange={(e) => formik.setFieldValue("photo_ss_path", e)} />
+          <Sample />
         </UI.Col>
 
         <Form.Select
@@ -225,6 +226,67 @@ export default function App({ refdata, loc, event }) {
   );
 }
 
+function Sample(params) {
+  const [onPreview, setonPreview] = useState(false);
+  console.log(onPreview);
+  return (
+    <>
+      <UI.Row
+        onClick={() => setonPreview(true)}
+        sx={{
+          "&:hover": {
+            cursor: "pointer",
+          },
+        }}
+      >
+        <UI.Text variant="body1">
+          * Contoh Screenhoot lihat
+          <span
+            style={{
+              color: "primary",
+              textDecoration: "underline",
+              fontWeight: "bold",
+            }}
+          >
+            {` disini`}
+          </span>
+        </UI.Text>
+      </UI.Row>
+      {onPreview && (
+        <UI.Modal open>
+          <UI.Col
+            sx={{
+              width: "100vw",
+              height: "100vh",
+              bgcolor: "black",
+              position: "relative",
+            }}
+          >
+            <UI.Col
+              sx={{
+                position: "absolute",
+                top: "32px",
+                right: "32px",
+              }}
+            >
+              <UI.IconButton onClick={() => setonPreview(false)} name="close" size={48} color="white" />
+            </UI.Col>
+            <img
+              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/assets/img/sample-ss.jpg`}
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </UI.Col>
+        </UI.Modal>
+      )}
+    </>
+  );
+}
+
 function InputPhoto({ data, value, onChange }) {
   const inputRef = useRef();
   return (
@@ -250,9 +312,9 @@ function InputPhoto({ data, value, onChange }) {
           </>
         )}
       </UI.Col>
-      <UI.Text variant="body2" align="center" pt={1}>
+      {/* <UI.Text variant="body2" align="center" pt={1}>
         {data.notes}
-      </UI.Text>
+      </UI.Text> */}
       <input
         multiple={false}
         ref={inputRef}

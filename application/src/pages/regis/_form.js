@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import InputKabupaten from "@/component/app/input/inputKabupaten";
 import LabelRegister from "@/component/app/input/labelRegister";
 import Context from "@context";
+import MainButton from "@/component/app/mainButton";
 
 export default function App({ refdata, loc, event }) {
   const { r } = React.useContext(Context);
@@ -31,7 +32,7 @@ export default function App({ refdata, loc, event }) {
   ];
 
   const formik = useFormik({
-    initialValues: refdata || {},
+    initialValues: refdata || { sk: false, tc: false },
     // validationSchema: validationSchema,
     onSubmit: async (payload) => {
       // console.log(payload);
@@ -44,7 +45,7 @@ export default function App({ refdata, loc, event }) {
           event_id: event.id,
         },
       });
-      r.push("/success");
+      r.push(`/success?eid=${event.id}`);
       // console.log(res.data);
       // if (res?.data?.id) {
       //   auth.signin(res.data);
@@ -56,33 +57,65 @@ export default function App({ refdata, loc, event }) {
     },
   });
 
+  function isValid() {
+    if (
+      !formik.values?.name ||
+      !formik.values?.hp ||
+      !formik.values?.email ||
+      !formik.values?.photo_ss_path ||
+      !formik.values?.tournament_date ||
+      !formik.values?.tc ||
+      !formik.values?.sk
+    )
+      return false;
+    return true;
+  }
+
   return (
-    <UI.Col center maxWidth="920px" width="100vw" position="relative">
-      <UI.Col maxWidth="720px" width="80%" position="relative">
+    <UI.Col center maxWidth="920px" width="100%" position="relative" px={2}>
+      <UI.Col
+        maxWidth="720px"
+        position="relative"
+        sx={{
+          width: "90%",
+        }}
+      >
         <Label l="Nama Lengkap" />
         <Form.Text name="name" value={formik.values.name} onChange={formik.handleChange} />
 
-        <Label l="Tanggal Lahir" />
-        <Form.Date name="dob" value={formik.values.dob} onChange={formik.handleChange} />
+        {/* <Label l="Tanggal Lahir" />
+        <Form.Date name="dob" value={formik.values.dob} onChange={formik.handleChange} /> */}
 
-        <Label l="Lokasi" />
-        <InputKabupaten value={formik.values.kabupaten_id} onChange={(e) => formik.setFieldValue("kabupaten_id", e)} />
+        {/* <Label l="Lokasi" />
+        <InputKabupaten value={formik.values.kabupaten_id} onChange={(e) => formik.setFieldValue("kabupaten_id", e)} /> */}
+        <Label l="No. HP/WA" />
+        <Form.Text name="hp" prefix="+62" value={formik.values.hp} onChange={(e) => formik.setFieldValue("hp", e.target.value.replace(/\D/g, ""))} />
 
-        <Label l="Nickname" />
-        <Form.Text name="name_nick" value={formik.values.name_nick} onChange={formik.handleChange} />
+        <Label l="Email" />
+        <Form.Text name="email" value={formik.values.email} onChange={formik.handleChange} />
 
-        <Label l="Ingame ID" />
+        <Label l="UID" />
         <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} />
 
-        <Label l="No. HP/WA" />
-        <Form.Currency name="hp" prefix="+62" value={formik.values.hp} onChange={formik.handleChange} />
-
-        <UI.Row justifyContent="center" gap={5}>
+        {/* <Label l="Ingame ID" />
+        <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} /> */}
+        {/* 
+        <UI.Stack
+          sx={{
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          gap={5}
+        >
           <InputPhoto data={photoinput[0]} value={formik.values.photo_path} onChange={(e) => formik.setFieldValue("photo_path", e)} />
           <InputPhoto data={photoinput[1]} value={formik.values.photo_id_path} onChange={(e) => formik.setFieldValue("photo_id_path", e)} />
-        </UI.Row>
+        </UI.Stack> */}
 
-        <Label l="Rank" />
+        {/* <Label l="Rank" />
         <Form.Select
           options={[
             { id: 1, name: "Legend" },
@@ -93,7 +126,7 @@ export default function App({ refdata, loc, event }) {
           name="rank"
           value={formik.values.rank}
           onChange={formik.handleChange}
-        />
+        /> */}
         <UI.Col center>
           <InputPhoto data={photoinput[2]} value={formik.values.photo_ss_path} onChange={(e) => formik.setFieldValue("photo_ss_path", e)} />
         </UI.Col>
@@ -155,7 +188,10 @@ export default function App({ refdata, loc, event }) {
 
       {!refdata?.id && (
         <UI.Col center>
-          <UI.Col
+          <MainButton onLoading={formik.isSubmitting} disabled={!isValid()} onClick={formik.handleSubmit}>
+            Confirm
+          </MainButton>
+          {/* <UI.Col
             center
             sx={{
               width: 390,
@@ -182,7 +218,7 @@ export default function App({ refdata, loc, event }) {
                 Confirm
               </UI.Text>
             )}
-          </UI.Col>
+          </UI.Col> */}
         </UI.Col>
       )}
     </UI.Col>

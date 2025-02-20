@@ -1,58 +1,74 @@
 import React, { useState, useEffect, useRef } from "react";
 import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { useMediaQuery } from "@mui/material";
+import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
 export default function App({ data }) {
-  const isMobile = useMediaQuery("(max-width:600px)"); // Adjust breakpoint as needed
-
   const splideRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  var settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    autoplay: true,
-  };
+  useEffect(() => {
+    // Add event listener to update the current slide index when slides change
+    const splide = splideRef.current?.splide;
+    if (splide) {
+      splide.on("moved", (newIndex) => {
+        setCurrentSlide(newIndex);
+      });
+    }
+
+    return () => {
+      if (splide) {
+        splide.off("moved");
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      splideRef?.current?.splide?.go(">");
+    }, 3000);
+  }, []);
 
   return (
     <UI.Col
       sx={{
         flexShrink: 0,
         position: "relative",
+        // overflow: "hidden",
         bgcolor: "#1e1e1e",
       }}
     >
-      <Slider {...settings} beforeChange={(oldIx, newIx) => setCurrentSlide(newIx)}>
+      <Splide
+        ref={splideRef}
+        options={{
+          arrows: false,
+          pagination: false,
+        }}
+      >
         {data?.map((d, ix) => (
-          <UI.Col
-            sx={{
-              height: isMobile ? 400 : "calc(100vh - 220px)",
-              minHeight: isMobile ? 0 : 720,
-              flexShrink: 0,
-            }}
+          <SplideSlide
             key={ix}
+            style={{
+              height: 640,
+              // maxHeight: 640,
+            }}
           >
-            <img
-              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d.path}`}
-              alt=""
-              style={{
-                height: "100%",
-                width: "100%",
-                objectFit: "cover",
-                objectPosition: "bottom",
-              }}
-            />
-          </UI.Col>
+            <>
+              <img
+                src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d.path}`}
+                alt=""
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "cover",
+                  objectPosition: "bottom",
+                }}
+              />
+            </>
+          </SplideSlide>
         ))}
-      </Slider>
+      </Splide>
       <UI.Col
         sx={{
           height: 120,

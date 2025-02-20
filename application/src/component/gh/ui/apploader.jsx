@@ -2,18 +2,11 @@ import UI from "@gh/ui";
 import CircularProgress, { circularProgressClasses } from "@mui/material/CircularProgress";
 
 export default function App({ size = 70, modal = false, msg }) {
-  if (!modal) return <Loader />;
+  if (!modal) return <Loader size={size} />;
 
   return (
     <UI.Modal open={modal} onClose={() => {}}>
-      <UI.Stack
-        flexGrow={1}
-        height="100dvh"
-        width={"100vw"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        spacing={2}
-      >
+      <UI.Stack flexGrow={1} height="100dvh" width={"100vw"} alignItems={"center"} justifyContent={"center"} spacing={2}>
         <Loader />
         <UI.Text variant="body1" color="white.main">
           {msg}

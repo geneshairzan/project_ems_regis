@@ -5,6 +5,7 @@ import useFetch, { fetcher } from "@gh/helper/useFetch";
 export default function App({ data }) {
   return (
     <UI.Col
+      id="STANDINGS"
       sx={{
         position: "relative",
         top: 0,
@@ -20,22 +21,32 @@ export default function App({ data }) {
           alignItems: "center",
           width: "100%",
           maxWidth: 920,
+          px: 2,
         }}
         py="100px"
       >
-        <UI.Text variant="h2">STANDINGS</UI.Text>
-        <RowItem d={{ no: "#", name: "Team Name", point: "Point", wl: "Match (W-L)", game: "Game (W-L)", diff: "Diff", bgcolor: "#35353d", color: "white" }} />
-        {data?.standing_json &&
-          data?.standing_json?.map((d, ix) => (
-            <RowItem
-              d={{
-                ...d,
-                no: ix + 1,
-              }}
-              key={ix}
-              lastItem={ix == data?.standing_json?.length - 1}
-            />
-          ))}
+        <UI.Text variant="h2" bold>
+          STANDINGS
+        </UI.Text>
+        <UI.Col
+          width="100%"
+          sx={{
+            pt: "38px",
+          }}
+        >
+          <RowItem d={{ no: "#", name: "Name", point: "Point", wl: "Match (W-L)", bgcolor: "#35353d", color: "white" }} />
+          {data?.standing_json &&
+            data?.standing_json?.map((d, ix) => (
+              <RowItem
+                d={{
+                  ...d,
+                  no: ix + 1,
+                }}
+                key={ix}
+                lastItem={ix == data?.standing_json?.length - 1}
+              />
+            ))}
+        </UI.Col>
 
         {/* <div dangerouslySetInnerHTML={{ __html: data?.standing_json }} /> */}
       </UI.Col>
@@ -79,26 +90,12 @@ function RowItem({ d, lastItem = false }) {
           alignItems: "center",
         }}
       >
-        <UI.Text variant="body1" flex={1}>
+        <UI.Text variant="body1" flex={1} align="center">
           {d.point}
         </UI.Text>
-        <UI.Text variant="body1" flex={1}>
+        <UI.Text variant="body1" flex={1} align="center">
           {d.wl}
         </UI.Text>
-        <UI.Text variant="body1" flex={1}>
-          {d.game}
-        </UI.Text>
-      </UI.Row>
-      <UI.Row
-        flex={1}
-        sx={{
-          borderRight: "1px solid black",
-          px: 2,
-          height: "100%",
-          alignItems: "center",
-        }}
-      >
-        {d.diff}
       </UI.Row>
     </UI.Row>
   );

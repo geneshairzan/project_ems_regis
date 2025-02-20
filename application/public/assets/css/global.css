@@ -1,21 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 @font-face {
-  font-family: Tandelle;
+  font-family: Akt;
   /* src: url("./font/tandelle.OTF"); */
   /* src: url("https://6sdmn6dycfdwkpa.mineski.id/assets/css/font/tandelle.OTF"); */
-  src: url("/fonts/tandelle.OTF");
-}
-
-@font-face {
-  font-family: Eixample;
-  /* src: url("./font/Eixample.OTF"); */
-  /* src: url("https://6sdmn6dycfdwkpa.mineski.id/assets/css/font/Eixample.OTF"); */
-  src: url("/fonts/Eixample.OTF");
+  src: url("/fonts/Akt-Regular.ttf");
 }
 
 * {
-  font-family: "Roboto", "Poppins", sans-serif;
+  font-family: "Akt", "Roboto", "Poppins", sans-serif;
   margin: 0;
   padding: 0;
 }

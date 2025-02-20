@@ -18,11 +18,12 @@ import Standing from "./standing";
 import Live from "./live";
 import Rules from "./rules";
 import Groups from "./groups";
-import Footer from "./footer";
+import { useMediaQuery } from "@mui/material";
 
 export default function App(props) {
   const { r } = React.useContext(Context);
   const [activeEvent, setactiveEvent] = useState(0);
+  const isMobile = useMediaQuery("(max-width:600px)"); // Adjust breakpoint as needed
 
   let events = useFetch({
     url: "event",
@@ -38,25 +39,27 @@ export default function App(props) {
     <UI.Col
       sx={{
         width: "100vw",
-        overflow: "auto",
-        posisition: "relative",
-        height: "100vh",
+        // overflowY: "auto",
+        // overflowX: "hidden",
+        // posisition: "relative",
+        // height: "100vh",
       }}
     >
-      <Header events={events.data} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />
+      <Header isMobile={isMobile} events={events.data} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />
       <UI.Col
         sx={{
           flex: 1,
-          overflow: "auto",
+          overflowY: "auto",
+          overflowX: "hidden",
+          pt: "80px",
         }}
       >
         <UI.Col>
           <Slider data={events?.data[activeEvent]?.attachment} />
           {events?.data[activeEvent]?.standing_json?.length > 0 && <Standing data={events?.data[activeEvent]} />}
-          <Live data={events?.data[activeEvent]} />
+          <Live data={events?.data[activeEvent]} isMobile={isMobile} />
           <Rules data={events?.data[activeEvent]?.rules} />
           {events?.data[activeEvent]?.group_json?.length > 0 && <Groups data={events?.data[activeEvent]} />}
-          <Footer data={events?.data[activeEvent]} />
         </UI.Col>
       </UI.Col>
     </UI.Col>

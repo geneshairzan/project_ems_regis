@@ -3,8 +3,9 @@ import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 import Menu from "@mui/material/Menu";
 import Context from "@context";
+import Drawer from "./_drawer";
 
-export default function App({ events, activeEvent, setactiveEvent, selector = true }) {
+export default function App({ events, activeEvent, setactiveEvent, selector = true, menu = true, isMobile }) {
   const { r } = React.useContext(Context);
   let menus = ["STANDINGS", "LIVE", "RULES", "GROUPS", "REGISTRATION"];
   return (
@@ -12,9 +13,16 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
       sx={{
         width: "100%",
         height: 80,
-        px: 5,
+        px: {
+          xs: 0,
+          md: 3,
+        },
         background: "linear-gradient(180deg, #1A1B1F 50%, #1D1D3A 100%)",
         justifyContent: "space-between",
+        position: "fixed",
+        top: 0,
+        zIndex: 9,
+        // opacity: 0.5,
       }}
     >
       <UI.Row
@@ -22,6 +30,10 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
         sx={{
           height: "100%",
           gap: 2,
+          pl: {
+            xs: 3.5,
+            md: 0,
+          },
         }}
       >
         <img
@@ -34,29 +46,47 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
             objectFit: "contain",
           }}
         />
-        {selector && <MenuRender events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />}
+        {selector && !isMobile && <MenuRender events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />}
       </UI.Row>
 
-      <UI.Row
-        sx={{
-          gap: 3,
-          alignItems: "center",
-        }}
-      >
-        {menus.map((d, ix) => (
-          <UI.Text key={ix} variant="body1" color="white">
-            {d}
-          </UI.Text>
-        ))}
-      </UI.Row>
+      {menu && !isMobile && (
+        <UI.Row
+          sx={{
+            gap: 3,
+            alignItems: "center",
+          }}
+        >
+          {menus.map((d, ix) => (
+            <a href={`#${d}`} key={ix}>
+              <UI.Text
+                variant="body1"
+                color="white"
+                style={{
+                  "&:hover": {
+                    cursor: "pointer",
+                    color: "#fb9c05",
+                  },
+                }}
+              >
+                {d}
+              </UI.Text>
+            </a>
+          ))}
+        </UI.Row>
+      )}
+      {isMobile && (
+        <UI.Row>
+          {/* <Drawer /> */}
+          <MenuRender w={240} events={events} activeEvent={activeEvent} setactiveEvent={setactiveEvent} />
+        </UI.Row>
+      )}
     </UI.Row>
   );
 }
 
-function MenuRender({ events, activeEvent, setactiveEvent }) {
+function MenuRender({ events, activeEvent, setactiveEvent, w = 280 }) {
   const { r } = React.useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const w = 280;
   return (
     <>
       <UI.Row

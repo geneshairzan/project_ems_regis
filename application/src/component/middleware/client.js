@@ -22,7 +22,7 @@ export default function AppMiddleware({ children }) {
 
   useEffect(() => {
     if (auth?.user?.id && router.asPath.includes("/auth")) {
-      router.push("/home");
+      router.push("/super");
     }
   }, [auth?.user]);
 

@@ -1,78 +1,44 @@
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import React, { useState, useEffect, useRef } from "react";
 import UI from "@gh/ui";
 import MainButton from "@/component/app/mainButton";
-import useFetch, { fetcher } from "@gh/helper/useFetch";
-import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
 import Context from "@context";
+import { useMediaQuery } from "@mui/material";
 
-export default function App({ data, height = 640 }) {
-  const splideRef = useRef(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+export default function SimpleSlider({ data }) {
+  const isMobile = useMediaQuery("(max-width:600px)"); // Adjust breakpoint as needed
+  const [activeEvent, setactiveEvent] = useState(0);
   const { r } = React.useContext(Context);
-  console.log(data);
-
-  useEffect(() => {
-    // Add event listener to update the current slide index when slides change
-    const splide = splideRef.current?.splide;
-    if (splide) {
-      splide.on("moved", (newIndex) => {
-        setCurrentSlide(newIndex);
-      });
-    }
-
-    return () => {
-      if (splide) {
-        splide.off("moved");
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    setInterval(() => {
-      splideRef?.current?.splide?.go(">");
-    }, 3000);
-  }, []);
-
+  var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    autoplay: true,
+  };
   return (
     <UI.Col
       sx={{
+        flex: 1,
+        overflowX: "hidden",
         flexShrink: 0,
         position: "relative",
-        bgcolor: "#1e1e1e",
-        flex: 1,
-        height: "100%",
-        flexShrink: 0,
+        bgcolor: "#0f122b",
+        pt: "80px",
       }}
     >
-      <Splide
-        ref={splideRef}
-        options={{
-          height: "100%",
-          arrows: false,
-          pagination: false,
-          autoplay: false,
-          // rewind: true,
-          type: "loop",
-          // cover: false,
-        }}
-        // hasTrack={false}
-        style={{
-          flex: 1,
-          height: "100%",
-          display: "flex",
-        }}
-        // onMounted={(splide) => {
-        //   console.log("mounter");
-        //   splide.Components.Autoplay.play();
-        // }}
-      >
-        {data?.map((d) => (
-          <SplideSlide
-            key={d.id}
-            style={{
-              height: "100%",
-              width: "100vw",
+      <Slider {...settings} beforeChange={(oldIx, newIx) => setactiveEvent(newIx)}>
+        {data?.map((d, ix) => (
+          <UI.Col
+            key={ix}
+            sx={{
+              height: isMobile ? 400 : "calc(100vh - 220px)",
+              minHeight: isMobile ? 0 : 720,
+              flexShrink: 0,
             }}
           >
             <img
@@ -82,45 +48,63 @@ export default function App({ data, height = 640 }) {
                 height: "100%",
                 width: "100%",
                 objectFit: "cover",
-                objectPosition: "bottom",
               }}
             />
-          </SplideSlide>
+          </UI.Col>
         ))}
-      </Splide>
-      <UI.Col
+      </Slider>
+      <Banner isMobile={isMobile} onClick={() => r.push(`/events?id=${data[activeEvent]?.id}`)} />
+    </UI.Col>
+  );
+}
+
+function Banner({ isMobile, onClick }) {
+  return (
+    <UI.Col
+      sx={{
+        width: "100%",
+        position: isMobile ? "relative" : "absolute",
+        zIndex: 2,
+        bottom: 0,
+        background: "#00000080",
+        backdropFilter: "blur(10px)",
+      }}
+    >
+      <UI.Stack
         sx={{
-          // height: 120,
-          width: "100%",
-          position: "absolute",
-          zIndex: 2,
-          bottom: 0,
-          background: "#00000080",
-          backdropFilter: "blur(10px)",
+          flexDirection: {
+            xs: "column",
+            md: "row",
+          },
+          px: {
+            xs: 2,
+            md: "80px",
+          },
+          py: 2,
+          gap: 2,
+          justifyContent: {
+            xs: "center",
+            md: "space-between",
+          },
+          alignItems: "center",
         }}
       >
-        <UI.Row spaced px={"80px"}>
-          <UI.Text
-            variant="h2"
-            color="white"
-            bold
-            sx={{
-              textTransform: "uppercase",
-            }}
-          >
-            Join the fun, Join the Hype <br />
-            Register your team <span style={{ color: "#e8b931" }}>now</span>
-          </UI.Text>
-          <MainButton
-            onClick={() => r.push(`/events?id=${data[currentSlide]?.id}`)}
-            sx={{
-              height: 80,
-            }}
-          >
-            Join Now !
-          </MainButton>
-        </UI.Row>
-      </UI.Col>
+        <UI.Text
+          color="white"
+          bold
+          sx={{
+            fontSize: 40,
+            textTransform: "uppercase",
+            textAlign: {
+              xs: "center",
+              md: "left",
+            },
+          }}
+        >
+          Claim the Throne <br />& Rule the Board. <span style={{ color: "#e8b931" }}>Go Chess, Go!</span>
+        </UI.Text>
+        <MainButton onClick={onClick}>Join Now !</MainButton>
+      </UI.Stack>
     </UI.Col>
   );
 }

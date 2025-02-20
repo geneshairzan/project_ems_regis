@@ -5,6 +5,7 @@ import useFetch, { fetcher } from "@gh/helper/useFetch";
 export default function App({ data }) {
   return (
     <UI.Col
+      id="RULES"
       sx={{
         position: "relative",
         top: 0,
@@ -15,13 +16,20 @@ export default function App({ data }) {
         sx={{
           zIndex: 2,
           alignItems: "center",
+          px: 2,
+          py: {
+            xs: "32px",
+            md: "100px",
+          },
         }}
-        py="100px"
       >
-        <UI.Text variant="h2">RULES</UI.Text>
+        <UI.Text variant="h2" bold>
+          RULES
+        </UI.Text>
         <UI.Col
           sx={{
             maxWidth: 1080,
+            pt: "38px",
           }}
         >
           {data.map((d, ix) => (
@@ -37,28 +45,6 @@ export default function App({ data }) {
           ))}
         </UI.Col>
       </UI.Col>
-    </UI.Col>
-  );
-}
-
-function BG(params) {
-  return (
-    <UI.Col
-      sx={{
-        position: "absolute",
-        zIndex: 1,
-        width: "100%",
-      }}
-    >
-      <img
-        src="/assets/img/standing-bg.png"
-        alt=""
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
-      />
     </UI.Col>
   );
 }

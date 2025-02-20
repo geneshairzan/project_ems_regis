@@ -29,12 +29,12 @@ export default function App(props) {
     <UI.Col
       sx={{
         width: "100vw",
-        posisition: "relative",
-        flex: 1,
-        overflow: "auto",
+        // posisition: "relative",
+        // flex: 1,
+        // overflow: "auto",
       }}
     >
-      <Header events={events.data} activeEvent={activeEvent} setactiveEvent={setactiveEvent} selector={false} />
+      <Header events={events.data} activeEvent={activeEvent} setactiveEvent={setactiveEvent} selector={false} menu={false} />
       <Slider
         data={events?.data?.map((d) => ({
           link: "#",

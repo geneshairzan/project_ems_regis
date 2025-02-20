@@ -52,7 +52,7 @@ export default function CustomStyles({ isDark = false, ...props }) {
       ...color,
     },
     typography: {
-      // fontFamily: "Eixample",
+      fontFamily: "Akt",
       fontSize: 14,
       // h1: {
       //   fontWeight: 600,

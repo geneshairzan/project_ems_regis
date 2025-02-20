@@ -2,30 +2,13 @@ import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 import Context from "@context";
-
-let sample = [
-  {
-    groupName: "A",
-    member: ["name A1", "name A2", "name A3", "name A4"],
-  },
-  {
-    groupName: "B",
-    member: ["name B1", "name B2", "name B3", "name B4"],
-  },
-  {
-    groupName: "C",
-    member: ["name C1", "name C2", "name C3", "name C4"],
-  },
-  {
-    groupName: "D",
-    member: ["name D1", "name D2", "name D3", "name D4"],
-  },
-];
+import MainButton from "@/component/app/mainButton";
 
 export default function App({ data }) {
   const { r } = React.useContext(Context);
   return (
     <UI.Col
+      id="GROUPS"
       sx={{
         position: "relative",
         top: 0,
@@ -40,7 +23,7 @@ export default function App({ data }) {
         }}
         py="100px"
       >
-        <UI.Text variant="h2" color="white">
+        <UI.Text variant="h2" color="white" bold>
           GROUPS
         </UI.Text>
         <UI.Col
@@ -48,32 +31,13 @@ export default function App({ data }) {
             maxWidth: 1440,
             minHeight: 600,
             width: "100%",
+            pt: "38px",
           }}
         >
           <RenderGroup data={data?.group_json} />
-          {/* <div dangerouslySetInnerHTML={{ __html: data?.group_json }} /> */}
         </UI.Col>
-        <UI.Col
-          center
-          sx={{
-            width: 390,
-            height: 120,
-            background: "linear-gradient(82.58deg, #DC7000 24.83%, #FCBE39 76.24%, #FFFFFF 100%)",
-            "&:hover": {
-              opacity: 0.8,
-              cursor: "pointer",
-            },
-          }}
-          onClick={() => r.push(`/regis?id=${data?.id}`)}
-        >
-          <UI.Text
-            sx={{
-              fontSize: 48,
-              color: "white",
-            }}
-          >
-            Join Now !
-          </UI.Text>
+        <UI.Col id="REGISTRATION">
+          <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>
         </UI.Col>
       </UI.Col>
     </UI.Col>

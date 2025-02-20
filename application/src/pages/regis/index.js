@@ -45,7 +45,10 @@ function FormRegis({ id }) {
           center
           sx={{
             width: "100vw",
-            maxWidth: 1080,
+            maxWidth: {
+              xs: "calc(100vw - 36px)",
+              md: 1080,
+            },
             zIndex: 1,
             boxShadow: "0px 4px 20px 0px #00000080",
             bgcolor: "white",

@@ -21,8 +21,8 @@ const handler = async (r, res) => {
       // id: "cm77hmvs3000b5qrhmh7hw1yl",
       event_id: raw.event_id,
       name: raw.name,
-      dob: new Date(raw.dob),
-      kabupaten_id: raw.kabupaten_id,
+      // dob: new Date(raw.dob),
+      // kabupaten_id: raw.kabupaten_id,
       nickname: raw.name_nick,
       ingame_id: raw.game_id,
       no_hp: raw.hp,
@@ -30,8 +30,8 @@ const handler = async (r, res) => {
       tournament_date: parseInt(raw.tournament_date),
     });
 
-    await upload(raw?.photo_path, `${data?.id}_photo`, "registrant");
-    await upload(raw?.photo_id_path, `${data?.id}_id`, "registrant");
+    // await upload(raw?.photo_path, `${data?.id}_photo`, "registrant");
+    // await upload(raw?.photo_id_path, `${data?.id}_id`, "registrant");
     await upload(raw?.photo_ss_path, `${data?.id}_ss`, "registrant");
 
     res.status(200).json(prisma.responseFilter(data));

@@ -106,6 +106,7 @@ model Registrant {
   id String @id @default(cuid())
 
   event_id        String
+  email           String?
   name            String?
   dob             DateTime?
   kabupaten_id    String?

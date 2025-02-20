@@ -40,7 +40,7 @@ export default function App({ data }) {
                 py: 2,
               }}
             >
-              <div dangerouslySetInnerHTML={{ __html: `${ix + 1}. ${d}` }} />
+              <div dangerouslySetInnerHTML={{ __html: d }} />
             </UI.Col>
           ))}
         </UI.Col>

@@ -14,6 +14,33 @@ export default function RegistrantList(params) {
   return <MainApp eid={r.query.eid} />;
 }
 
+const exportToCSV = (data, filterKeys) => {
+  // Extract only selected keys from data
+  const filteredData = data.map((obj) => Object.fromEntries(filterKeys.map((key) => [key, obj[key]])));
+
+  // Convert to CSV format
+  const csvRows = [];
+  const headers = filterKeys.join(","); // Create headers from selected keys
+  csvRows.push(headers);
+
+  for (const row of filteredData) {
+    const values = filterKeys.map((key) => row[key] || "").join(",");
+    csvRows.push(values);
+  }
+
+  const csvContent = csvRows.join("\n");
+
+  // Create a Blob and trigger download
+  const blob = new Blob([csvContent], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "filtered_data.csv";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 function MainApp({ eid }) {
   const { r } = React.useContext(Context);
 
@@ -30,6 +57,7 @@ function MainApp({ eid }) {
   let model = "registrant";
 
   if (!event.data || !registrant.data) return;
+  console.log(registrant?.data);
 
   return (
     <UI.Col px={{ xs: 2, md: 5 }} width="100%" flex={1}>
@@ -39,8 +67,11 @@ function MainApp({ eid }) {
         </UI.Modal>
       )}
       <UI.IconButton name="arrow_back" color="black" size={64} onClick={r.back} />
-      <UI.Row alignItems="center">
+      <UI.Row spaced>
         <UI.Text variant="h2">{event?.data?.name}</UI.Text>
+        <UI.Button onClick={() => exportToCSV(registrant?.data, ["name", "ingame_id", "email", "no_hp", "tournament_date", "status"])} variant="outlined">
+          Export CSV
+        </UI.Button>
       </UI.Row>
       <UI.Text variant="h4">Registrant</UI.Text>
 

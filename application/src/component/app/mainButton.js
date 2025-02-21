@@ -25,7 +25,7 @@ export default function App({ onClick, children, sx, disabled = false, onLoading
           cursor: "pointer",
         },
       }}
-      onClick={onClick}
+      onClick={() => !disabled && onClick()}
     >
       {onLoading && <UI.Loader size={36} />}
       {!onLoading && (

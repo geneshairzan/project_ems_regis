@@ -31,7 +31,10 @@ export default function App({ data }) {
         ))}
       </UI.Row>
       <UI.Text variant="body1" color="white" pt="44px">
-        Contact Us: mobilelegendsgame@moonton.com
+        Contact Us:{" "}
+        <a href="mailto:mobilechess.help@moonton.com">
+          mobilechess.help@moonton.com
+        </a>
       </UI.Text>
       <UI.Text variant="body1" color="white" pt="12px">
         © Moonton. All rights reserved.

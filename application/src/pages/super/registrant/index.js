@@ -133,6 +133,9 @@ function RowItem({ data, header = false, onClick }) {
 }
 
 function Preview({ data, event, ranks, loc, onClose, onReload }) {
+  let img_opt = [`${data.photo_ss_path}`, `${data.id}_ss.png`, `${data.id}_ss.jpg`, `${data.id}_ss.jpeg`];
+  const [imageState, setimageState] = useState(0);
+
   async function handleApproved() {
     let res = await fetcher({
       url: "registrant/status",
@@ -145,6 +148,11 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
     onClose();
     onReload();
   }
+
+  function handleImgError() {
+    setimageState((p) => p + 1);
+  }
+
   return (
     <UI.Col
       width="100%"
@@ -194,7 +202,9 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
         /> */}
 
         <img
-          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data.id}_ss.png`}
+          key={imageState}
+          onError={handleImgError}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${img_opt[imageState]}`}
           style={{
             height: 180,
             width: "auto",

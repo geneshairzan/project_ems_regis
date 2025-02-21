@@ -10,6 +10,7 @@ import MainButton from "@/component/app/mainButton";
 
 export default function App({ refdata, loc, event }) {
   const [error, setError] = useState(false);
+  const [isDuplicate, setisDuplicate] = useState(false);
   const { r } = React.useContext(Context);
   let photoinput = [
     {
@@ -46,15 +47,11 @@ export default function App({ refdata, loc, event }) {
           event_id: event.id,
         },
       });
-      r.push(`/success?eid=${event.id}`);
-      // console.log(res.data);
-      // if (res?.data?.id) {
-      //   auth.signin(res.data);
-      //   onLogged(true);
-      //   r.replace("/home");
-      // } else {
-      //   seterr("Authentication Failed");
-      // }
+      if (res.data == "duplicate") {
+        setisDuplicate(true);
+      } else {
+        r.push(`/success?eid=${event.id}`);
+      }
     },
   });
 
@@ -185,6 +182,11 @@ export default function App({ refdata, loc, event }) {
 
       {!refdata?.id && (
         <UI.Col center>
+          {isDuplicate && (
+            <UI.Text color="error.main" pb={2}>
+              This user already registered in out system
+            </UI.Text>
+          )}
           <MainButton onLoading={formik.isSubmitting} disabled={!isValid()} onClick={formik.handleSubmit}>
             Confirm
           </MainButton>

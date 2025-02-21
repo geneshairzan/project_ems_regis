@@ -16,6 +16,17 @@ const handler = async (r, res) => {
   let raw = await parse(r);
 
   if (r.method == "POST") {
+    const is_exist = await extendPrisma.Registrant.findFirst({
+      where: {
+        event_id: raw.event_id,
+        OR: [{ ingame_id: raw.game_id }, { email: raw.email }],
+      },
+    });
+
+    if (is_exist) {
+      return res.status(200).json("duplicate");
+    }
+
     let data = await prisma.set("registrant", {
       ...(raw.id ? { id: raw.id } : {}),
       // id: "cm77hmvs3000b5qrhmh7hw1yl",
@@ -33,7 +44,12 @@ const handler = async (r, res) => {
 
     // await upload(raw?.photo_path, `${data?.id}_photo`, "registrant");
     // await upload(raw?.photo_id_path, `${data?.id}_id`, "registrant");
-    await upload(raw?.photo_ss_path, `${data?.id}_ss`, "registrant");
+    let path = await upload(raw?.photo_ss_path, `${data?.id}_ss`, "registrant");
+
+    await prisma.update("registrant", {
+      id: data.id,
+      photo_ss_path: path,
+    });
 
     res.status(200).json(prisma.responseFilter(data));
   } else {

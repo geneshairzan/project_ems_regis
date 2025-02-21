@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
+import h from "@gh/helper";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 import Context from "@context";
 import MainButton from "@/component/app/mainButton";
@@ -9,6 +10,13 @@ const itemsPerPage = 8; // Number of items per page
 
 export default function App({ data }) {
   const { r } = React.useContext(Context);
+
+  const isVisible = () => {
+    const now = new Date();
+    const start = new Date(data.start);
+    const end = new Date(data.end);
+    return now >= start && now <= end;
+  };
 
   return (
     <UI.Col
@@ -45,9 +53,8 @@ export default function App({ data }) {
           </>
         )}
 
-        <UI.Col id="REGISTRATION">
-          <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>
-        </UI.Col>
+        {console.log(data)}
+        <UI.Col id="REGISTRATION">{isVisible() && <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>}</UI.Col>
       </UI.Col>
     </UI.Col>
   );

@@ -3,7 +3,7 @@ import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 
 export default function App({ data }) {
-  let logo = ["logo_mt.png", "logo_ml.png", "logo_bd.png"];
+  let logo = ["logo_mt.png", "logo_mcgg.png", "logo_bd.png"];
   return (
     <UI.Col
       sx={{
@@ -16,9 +16,18 @@ export default function App({ data }) {
       }}
       center
     >
-      <UI.Row gap={4}>
+      <UI.Row gap={4} height={36}>
         {logo.map((d, ix) => (
-          <img key={ix} src={`/assets/img/${d}`} alt="" />
+          <img
+            key={ix}
+            src={`/assets/img/${d}`}
+            alt=""
+            style={{
+              // objectFit: "cover",
+              height: "100%",
+              width: "auto",
+            }}
+          />
         ))}
       </UI.Row>
       <UI.Text variant="body1" color="white" pt="44px">

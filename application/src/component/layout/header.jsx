@@ -32,7 +32,7 @@ export default function App({ grey = false }) {
             alt=""
           />
         </UI.Col>
-        {auth.user?.id && <ModalLogin auth={auth} setmodalOpen={() => {}} />}
+        {/* {auth.user?.id && <ModalLogin auth={auth} setmodalOpen={() => {}} />} */}
       </UI.Row>
     </AppBar>
   );

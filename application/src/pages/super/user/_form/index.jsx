@@ -52,9 +52,9 @@ export default function Main({ refdata }) {
           },
         });
 
-        res2?.data && router.push(`/user`);
+        res2?.data && router.push(`/super/user`);
       } else {
-        router.push(`/user`);
+        router.push(`/super/user`);
       }
     },
   });
@@ -77,7 +77,7 @@ export default function Main({ refdata }) {
           padding: 2,
         }}
       >
-        <Form.ImgCrop
+        {/* <Form.ImgCrop
           refimg={refdata?.img && process.env.NEXT_PUBLIC_APP_URL + "/api/file/user/" + refdata?.img}
           result={(e) => formik.setFieldValue("new_pp", e)}
           triggerEl={
@@ -98,8 +98,8 @@ export default function Main({ refdata }) {
               />
             </UI.Col>
           }
-        />
-        <Form.Text name="name" label="name" value={formik.values.name} onChange={formik.handleChange} />
+        /> */}
+        {/* <Form.Text name="name" label="name" value={formik.values.name} onChange={formik.handleChange} /> */}
         <Form.Text
           name="email"
           label="email"
@@ -108,12 +108,13 @@ export default function Main({ refdata }) {
           error={formik.errors.email}
           helperText={formik.errors.email}
         />
-        <Form.Text name="phone" label="phone" value={formik.values.phone} onChange={formik.handleChange} />
+
+        {/* <Form.Text name="phone" label="phone" value={formik.values.phone} onChange={formik.handleChange} />
         <Form.Text name="company" label="company" value={formik.values.company} onChange={formik.handleChange} />
         <Form.Text name="title" label="title" value={formik.values.title} onChange={formik.handleChange} />
         <Form.Data url={"userrole"} name="role_id" label="role" value={formik.values.role_id} onChange={formik.handleChange} />
-        <Form.Data url={"usertype"} name="type_id" label="type" value={formik.values.type_id} onChange={formik.handleChange} />
-        {refdata?.has_pwd && <Form.Text name="password" label="New Password" type="password" value={formik.values.password} onChange={formik.handleChange} />}
+        <Form.Data url={"usertype"} name="type_id" label="type" value={formik.values.type_id} onChange={formik.handleChange} /> */}
+        <Form.Text name="password" label="New Password" type="password" value={formik.values.password} onChange={formik.handleChange} />
       </UI.Col>
 
       <UI.Row alignItems="flex-end">

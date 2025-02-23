@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
+import MainButton from "@/component/app/mainButton";
 
 export default function App({ data }) {
   let logo = ["logo_mt.png", "logo_mcgg.png", "logo_bd.png"];
@@ -16,6 +17,21 @@ export default function App({ data }) {
       }}
       center
     >
+      <MainButton
+        onClick={() => {
+          window.open("https://app.adjust.com/1iqg4h10_1ige6nfm?campaign=MCCTID&deeplink=mobilechess%3A%2F%2Fappinvites", "_blank");
+        }}
+        sx={{
+          height: 32,
+          width: 90,
+        }}
+        fontStye={{
+          fontSize: 10,
+        }}
+      >
+        Download Game
+      </MainButton>
+
       <UI.Row gap={4} height={36}>
         {logo.map((d, ix) => (
           <img
@@ -31,10 +47,7 @@ export default function App({ data }) {
         ))}
       </UI.Row>
       <UI.Text variant="body1" color="white" pt="44px">
-        Contact Us:{" "}
-        <a href="mailto:mobilechess.help@moonton.com">
-          mobilechess.help@moonton.com
-        </a>
+        Contact Us: <a href="mailto:mobilechess.help@moonton.com">mobilechess.help@moonton.com</a>
       </UI.Text>
       <UI.Text variant="body1" color="white" pt="12px">
         © Moonton. All rights reserved.

@@ -114,7 +114,7 @@ function MoreComponent({ morestate, setmorestate, model, modelinfo, onDelete, ..
 
   return (
     <Menu anchorEl={morestate.anchorEl} open={morestate.open} onClose={() => setmorestate({})} TransitionComponent={Fade}>
-      <UI.ListItemButton onClick={() => router.push(`/${model}/${morestate.id}`)}>
+      <UI.ListItemButton onClick={() => router.push(`/super/${model}/${morestate.id}`)}>
         <MoreMenu label="Edit" Icon={Icon.Edit} />
       </UI.ListItemButton>
 

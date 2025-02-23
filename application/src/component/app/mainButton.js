@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import UI from "@gh/ui";
 import useFetch, { fetcher } from "@gh/helper/useFetch";
 
-export default function App({ onClick, children, sx, disabled = false, onLoading = false }) {
+export default function App({ onClick, children, sx, fontStye, disabled = false, onLoading = false }) {
   return (
     <UI.Col
       center
@@ -36,6 +36,7 @@ export default function App({ onClick, children, sx, disabled = false, onLoading
               md: 48,
             },
             color: "white",
+            ...fontStye,
           }}
         >
           {children}

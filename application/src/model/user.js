@@ -14,10 +14,10 @@ export const user = {
     },
   },
   col: [
-    { name: "name", label: "Name", w: 200 },
-    { name: "role", label: "role", w: 120 },
-    { name: "type", label: "type", w: 120 },
-    { name: "company", label: "company", w: 220 },
+    // { name: "name", label: "Name", w: 200 },
+    // { name: "role", label: "role", w: 120 },
+    // { name: "type", label: "type", w: 120 },
+    // { name: "company", label: "company", w: 220 },
     { name: "email", label: "email", w: "auto" },
   ],
   datamap: (d) => {

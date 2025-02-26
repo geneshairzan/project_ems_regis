@@ -59,7 +59,12 @@ function MainApp({ eid }) {
   if (!event.data || !registrant.data) return;
 
   function exportMap(d) {
-    return { ...d, status: d.status == 0 ? "Waiting" : "Approved", tournament_date: event?.data?.tanggal_options[parseInt(d.tournament_date)] };
+    return {
+      ...d,
+      status: d.status == 0 ? "Waiting" : "Approved",
+      tournament_date: event?.data?.tanggal_options[parseInt(d.tournament_date)],
+      img: `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${d.photo_ss_path}`,
+    };
   }
 
   return (
@@ -73,7 +78,7 @@ function MainApp({ eid }) {
       <UI.Row spaced>
         <UI.Text variant="h2">{event?.data?.name}</UI.Text>
         <UI.Button
-          onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status"])}
+          onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"])}
           variant="outlined"
         >
           Export CSV

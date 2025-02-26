@@ -63,7 +63,7 @@ function MainApp({ eid }) {
       ...d,
       status: d.status == 0 ? "Waiting" : "Approved",
       tournament_date: event?.data?.tanggal_options[parseInt(d.tournament_date)],
-      img: `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${d.photo_ss_path}`,
+      img: `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${d.photo_ss_path}?render=1`,
     };
   }
 

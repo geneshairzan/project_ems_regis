@@ -18,8 +18,26 @@ const handler = async (r, res) => {
 
   try {
     let filePath = await path.resolve(`storage/upload/${q.storage}/${q.target}`);
-    var bloob = fs.readFileSync(filePath);
-    return res.status(200).send(bloob);
+
+    const fileStream = fs.createReadStream(filePath);
+    const ext = path.extname(q.target).toLowerCase();
+
+    // Define MIME types for rendering
+    const mimeTypes = {
+      ".png": "image/png",
+      ".jpg": "image/jpeg",
+      ".jpeg": "image/jpeg",
+      ".gif": "image/gif",
+      ".pdf": "application/pdf",
+    };
+
+    if (q.render && mimeTypes[ext]) {
+      res.setHeader("Content-Type", mimeTypes[ext]);
+      return fileStream.pipe(res);
+    } else {
+      res.setHeader("Content-Disposition", `attachment; filename="${q.target}"`);
+      return fileStream.pipe(res);
+    }
   } catch (error) {
     let filePath = await path.resolve(`storage/upload/${q.storage}/${q.target}`);
     var bloob = fs.readFileSync(filePath);

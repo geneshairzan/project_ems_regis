@@ -39,8 +39,8 @@ const handler = async (r, res) => {
       return fileStream.pipe(res);
     }
   } catch (error) {
-    let filePath = await path.resolve(`storage/upload/${q.storage}/${q.target}`);
-    var bloob = fs.readFileSync(filePath);
+    // let filePath = await path.resolve(`storage/upload/${q.storage}/${q.target}`);
+    // var bloob = fs.readFileSync(filePath);
     return res.status(400).json("not found");
   }
 };

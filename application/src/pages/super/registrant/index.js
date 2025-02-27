@@ -5,6 +5,7 @@ import useFetch, { fetcher } from "@gh/helper/useFetch";
 import Context from "@context";
 import Datatables from "@gh/dataTables";
 import { getInfo } from "@/model";
+import RemoteImg from "@/component/remoteImg";
 
 export default function RegistrantList(params) {
   const { r } = React.useContext(Context);
@@ -63,7 +64,7 @@ function MainApp({ eid }) {
       ...d,
       status: d.status == 0 ? "Waiting" : "Approved",
       tournament_date: event?.data?.tanggal_options[parseInt(d.tournament_date)],
-      img: d?.photo_ss_path ? `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${d.photo_ss_path}?render=1` : "",
+      img: d?.photo_ss_path ? `${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${d.photo_ss_path}?render=1&k=fs2dK6Lfj` : "",
     };
   }
 
@@ -155,7 +156,7 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
   }
 
   function handleImgError() {
-    setimageState((p) => p + 1);
+    imageState < 3 && setimageState((p) => p + 1);
   }
 
   return (
@@ -205,8 +206,16 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
           }}
           alt=""
         /> */}
-
-        <img
+        <RemoteImg
+          key={imageState}
+          onError={handleImgError}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${img_opt[imageState]}`}
+          style={{
+            height: 180,
+            width: "auto",
+          }}
+        />
+        {/* <img
           key={imageState}
           onError={handleImgError}
           src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${img_opt[imageState]}`}
@@ -215,7 +224,7 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
             width: "auto",
           }}
           alt=""
-        />
+        /> */}
       </UI.Row>
 
       <UI.Col>

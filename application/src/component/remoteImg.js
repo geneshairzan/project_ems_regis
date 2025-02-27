@@ -4,7 +4,7 @@ import { Md5 } from "ts-md5";
 const accX = "w}5opZ%3oIQ6Vq(PUsTL";
 const accY = new Date().getTime();
 
-export default function RemoteImg({ src, style }) {
+export default function RemoteImg({ src, style, ...props }) {
   const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
@@ -26,5 +26,5 @@ export default function RemoteImg({ src, style }) {
     fetchImage();
   }, [src]);
 
-  return <img src={imageSrc} alt="" style={style} />;
+  return <img src={imageSrc} alt="" style={style} {...props} />;
 }

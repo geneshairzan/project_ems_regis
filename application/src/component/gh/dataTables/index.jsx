@@ -100,18 +100,15 @@ export default function Datatables({
         />
       )}
       {/* {pagination && <RenderPagination links={pagination} clickedPagination={clickedPagination} />} */}
-      {/* {data && pagination && (
+      {data && pagination && (
         <Pagination
-          count={Math.ceil(
-            data.filter((d) => UI.Datatables.search(d, search)).sort((a, b) => UI.Datatables.order(a, b, order))
-              ?.length / pagination.perpage
-          )}
+          count={Math.ceil(data.filter((d) => UI.Datatables.search(d, search)).sort((a, b) => UI.Datatables.order(a, b, order))?.length / pagination.perpage)}
           variant="outlined"
           shape="rounded"
           page={activePage}
           onChange={(e, v) => setactivePage(v)}
         />
-      )} */}
+      )}
     </UI.Stack>
   );
 }

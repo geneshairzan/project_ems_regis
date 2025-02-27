@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const allowedOrigins = ["*"];
+const allowedOrigins = ["mcggesports.id"];
 
 const corsOptions = {
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -10,8 +10,8 @@ const corsOptions = {
 export function middleware(request) {
   // Check the origin from the request
   const origin = request.headers.get("origin") ?? "";
-  // const isAllowedOrigin = allowedOrigins.includes(origin);
-  const isAllowedOrigin = true;
+  const isAllowedOrigin = allowedOrigins.includes(origin);
+  // const isAllowedOrigin = true;
 
   // Handle preflighted requests
   const isPreflight = request.method === "OPTIONS";

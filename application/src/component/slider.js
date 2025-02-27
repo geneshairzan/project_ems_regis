@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "@mui/material";
+import RemoteImg from "@/component/remoteImg";
 
 export default function App({ data }) {
   const isMobile = useMediaQuery("(max-width:600px)"); // Adjust breakpoint as needed
@@ -40,7 +41,17 @@ export default function App({ data }) {
             }}
             key={ix}
           >
-            <img
+            <RemoteImg
+              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d.path}`}
+              style={{
+                height: "100%",
+                width: "100%",
+                objectFit: "cover",
+                objectPosition: "bottom",
+              }}
+            />
+
+            {/* <img
               src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d.path}`}
               alt=""
               style={{
@@ -49,7 +60,7 @@ export default function App({ data }) {
                 objectFit: "cover",
                 objectPosition: "bottom",
               }}
-            />
+            /> */}
           </UI.Col>
         ))}
       </Slider>

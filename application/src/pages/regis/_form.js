@@ -7,6 +7,7 @@ import InputKabupaten from "@/component/app/input/inputKabupaten";
 import LabelRegister from "@/component/app/input/labelRegister";
 import Context from "@context";
 import MainButton from "@/component/app/mainButton";
+import RemoteImg from "@/component/remoteImg";
 
 export default function App({ refdata, loc, event }) {
   const [error, setError] = useState(false);
@@ -269,7 +270,15 @@ function Sample(params) {
             >
               <UI.IconButton onClick={() => setonPreview(false)} name="close" size={48} color="white" />
             </UI.Col>
-            <img
+            <RemoteImg
+              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/assets/img/sample-ss.jpg`}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+            {/* <img
               src={`${process.env.NEXT_PUBLIC_ASSET_URL}/assets/img/sample-ss.jpg`}
               alt=""
               style={{
@@ -277,7 +286,7 @@ function Sample(params) {
                 height: "100%",
                 objectFit: "contain",
               }}
-            />
+            /> */}
           </UI.Col>
         </UI.Modal>
       )}

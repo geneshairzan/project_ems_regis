@@ -7,6 +7,7 @@ import UI from "@gh/ui";
 import MainButton from "@/component/app/mainButton";
 import Context from "@context";
 import { useMediaQuery } from "@mui/material";
+import RemoteImg from "@/component/remoteImg";
 
 export default function SimpleSlider({ data }) {
   const isMobile = useMediaQuery("(max-width:600px)"); // Adjust breakpoint as needed
@@ -41,7 +42,15 @@ export default function SimpleSlider({ data }) {
               flexShrink: 0,
             }}
           >
-            <img
+            <RemoteImg
+              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d?.img?.path}`}
+              style={{
+                height: "100%",
+                width: "100%",
+                objectFit: "cover",
+              }}
+            />
+            {/* <img
               src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d?.img?.path}`}
               alt=""
               style={{
@@ -49,7 +58,7 @@ export default function SimpleSlider({ data }) {
                 width: "100%",
                 objectFit: "cover",
               }}
-            />
+            /> */}
           </UI.Col>
         ))}
       </Slider>

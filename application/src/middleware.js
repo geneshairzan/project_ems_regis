@@ -4,7 +4,7 @@ const allowedOrigins = ["mcggesports.id"];
 
 const corsOptions = {
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, Access-Y, Access-X, cache-control, pragma, expires ",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, Access-Y, Access-X, X-Access-Y, x-Access-X,cache-control, pragma, expires ",
 };
 
 export function middleware(request) {

@@ -106,11 +106,11 @@ function MoreComponent({ morestate, setmorestate, model, modelinfo, onDelete, ..
         </UI.ListItemButton>
       )}
 
-      {modelinfo?.list?.deleteable && (
+      {/* {modelinfo?.list?.deleteable && (
         <UI.ListItemButton onClick={onDelete}>
           <MoreMenu label="Delete" Icon={Icon.Close} color="error" />
         </UI.ListItemButton>
-      )}
+      )} */}
     </Menu>
   );
 }

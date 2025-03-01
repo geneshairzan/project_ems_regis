@@ -12,6 +12,7 @@ const middlewareChain = (handler) => async (req, res) => {
   let y = req.headers["x-access-y"];
   let checkshum = Md5.hashStr("w}5opZ%3oIQ6Vq(PUsTL" + y);
 
+  console.log(req.query.render);
   if (checkshum != x && !req.query.render) {
     return res.status(401).json("no auth");
   }

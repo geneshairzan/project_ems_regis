@@ -208,8 +208,9 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
         /> */}
         <RemoteImg
           key={imageState}
-          onError={handleImgError}
-          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${img_opt[imageState]}`}
+          // onError={handleImgError}
+          // src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${img_opt[imageState]}`}
+          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/registrant/${data?.photo_ss_path}?render=1&k=fs2dK6Lfj`}
           style={{
             height: 180,
             width: "auto",

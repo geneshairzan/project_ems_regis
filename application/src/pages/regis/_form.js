@@ -239,7 +239,7 @@ function Sample(params) {
         }}
       >
         <UI.Text variant="body1">
-          * Contoh Screenhoot lihat
+          * Contoh Screenshoot lihat
           <span
             style={{
               color: "primary",

@@ -82,8 +82,8 @@ export default function App({ refdata }) {
       <InputSlider multiple onChange={(e) => formik.setFieldValue("_newfile", e)} value={formik.values._newfile.map((d, ix) => ({ ...d, _tid: ix }))} />
 
       <UI.Row gap={2}>
-        <Form.Date label="Tanggal Mulai" name="start" value={formik.values.start} onChange={formik.handleChange} />
-        <Form.Date label="Tanggal Selesai" name="end" value={formik.values.end} onChange={formik.handleChange} />
+        <Form.DateTime label="Tanggal Mulai" name="start" value={formik.values.start} onChange={formik.handleChange} />
+        <Form.DateTime label="Tanggal Selesai" name="end" value={formik.values.end} onChange={formik.handleChange} />
       </UI.Row>
       <Form.Currency label="Maximum Participant" prefix="" name="max_pax" value={formik.values.max_pax} onChange={formik.handleChange} />
 

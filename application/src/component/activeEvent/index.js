@@ -33,6 +33,20 @@ export default function App(props) {
     if (r.query?.id && events?.data?.length) setactiveEvent(events?.data?.findIndex((d) => d.id == r.query.id));
   }, [r.query, events.data]);
 
+  useEffect(() => {
+    // Check if the URL contains #RULES
+    if (window.location.hash === "#RULES") {
+      const timer = setTimeout(() => {
+        const rulesSection = document.getElementById("RULES");
+        if (rulesSection) {
+          rulesSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500); // Delay to ensure content is loaded
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   if (!events.data || activeEvent == -1) return;
 
   return (

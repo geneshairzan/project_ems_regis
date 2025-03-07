@@ -19,6 +19,7 @@ const handler = async (r, res) => {
     const is_exist = await extendPrisma.Registrant.findFirst({
       where: {
         event_id: raw.event_id,
+        deleted_at: null,
         OR: [{ ingame_id: raw.game_id }, { email: raw.email }],
       },
     });

@@ -27,7 +27,7 @@ export default function App({ refdata, loc, event }) {
       notes: "*KTP/Kartu Pelajar/SIM",
     },
     {
-      label: "Screenshoot Rank",
+      label: "Screenshot Rank",
       name: "photo_ss_path",
       bg: "ico_rank",
       notes: "*KTP/Kartu Pelajar/SIM",
@@ -168,15 +168,19 @@ export default function App({ refdata, loc, event }) {
         <UI.Row alignItems="center">
           <Form.Checkbox value={formik.values.tc} onChange={() => formik.setFieldValue("tc", !formik.values.tc)} />
           <UI.Text variant="body1">
-            saya setuju dengan syarat dan ketentuan tournament
-            <span
-              style={{
+            {`Saya setuju dengan syarat dan ketentuan tournament `}
+            <UI.Text
+              component="a"
+              // href={`https://mcggesports.id/events?id=${event?.id}#RULES`}
+              href="https://docs.google.com/document/d/1TtRtmdyunRJIcwh6UUYE92FFZBuT_s2dYxuPzs1Ap74/edit?usp=sharing"
+              target="_blank"
+              sx={{
                 color: "#0066ff",
                 textDecoration: "underline",
               }}
             >
-              {` Syarat & Ketentuan.`}
-            </span>
+              {`Syarat & Ketentuan.`}
+            </UI.Text>
           </UI.Text>
         </UI.Row>
       </UI.Col>
@@ -227,7 +231,6 @@ export default function App({ refdata, loc, event }) {
 
 function Sample(params) {
   const [onPreview, setonPreview] = useState(false);
-  console.log(onPreview);
   return (
     <>
       <UI.Row
@@ -239,7 +242,7 @@ function Sample(params) {
         }}
       >
         <UI.Text variant="body1">
-          * Contoh Screenshoot lihat
+          {`* Contoh Screenshot lihat `}
           <span
             style={{
               color: "primary",
@@ -247,7 +250,7 @@ function Sample(params) {
               fontWeight: "bold",
             }}
           >
-            {` disini`}
+            {`disini`}
           </span>
         </UI.Text>
       </UI.Row>
@@ -270,8 +273,8 @@ function Sample(params) {
             >
               <UI.IconButton onClick={() => setonPreview(false)} name="close" size={48} color="white" />
             </UI.Col>
-            <RemoteImg
-              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/assets/img/sample-ss.jpg`}
+            <img
+              src={`/assets/img/sample-ss.jpg`}
               style={{
                 width: "100%",
                 height: "100%",

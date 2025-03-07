@@ -3,6 +3,7 @@ import CheckGroup from "./inputCheckGroup";
 import Text from "./inputText";
 import Telp from "./inputTelp";
 import Date from "./inputDate";
+import DateTime from "./inputDateTime";
 import Year from "./inputDateYear";
 import Radio from "./inputRadio";
 import Currency from "./inputCurrency";
@@ -33,6 +34,7 @@ const Form = {
   Select,
   Telp,
   Date,
+  DateTime,
   Year,
   Checkbox,
   CheckGroup,

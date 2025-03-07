@@ -110,7 +110,7 @@ function Banner(params) {
             height: 80,
           }}
         >
-          Join Now !
+          Join Now!
         </MainButton>
       </UI.Row>
     </UI.Col>

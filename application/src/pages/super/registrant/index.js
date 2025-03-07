@@ -44,6 +44,7 @@ const exportToCSV = (data, filterKeys) => {
 
 function MainApp({ eid }) {
   const { r } = React.useContext(Context);
+  const [reconfirm, setreconfirm] = useState(false);
 
   let ranks = [
     { id: 1, name: "Legend" },
@@ -68,8 +69,22 @@ function MainApp({ eid }) {
     };
   }
 
+  async function handleExportDelete() {
+    exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"]);
+    let res = await fetcher({
+      url: "/registrant/clear",
+      method: "post",
+      data: {
+        event_id: eid,
+      },
+    });
+    registrant.reload();
+    setreconfirm(false);
+  }
+
   return (
     <UI.Col px={{ xs: 2, md: 5 }} width="100%" flex={1}>
+      {reconfirm && <Reconfirm onOk={handleExportDelete} onCancel={() => setreconfirm(false)} />}
       {onDetail && (
         <UI.Modal open onClose={() => setonDetail()}>
           <Preview event={event.data} data={onDetail} onReload={registrant.reload} onClose={() => setonDetail()} ranks={ranks} loc={loc.data} />
@@ -78,12 +93,17 @@ function MainApp({ eid }) {
       <UI.IconButton name="arrow_back" color="black" size={64} onClick={r.back} />
       <UI.Row spaced>
         <UI.Text variant="h2">{event?.data?.name}</UI.Text>
-        <UI.Button
-          onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"])}
-          variant="outlined"
-        >
-          Export CSV
-        </UI.Button>
+        <UI.Row gap={2}>
+          <UI.Button onClick={() => setreconfirm(true)} variant="outlined" color="secondary">
+            Export and Delete
+          </UI.Button>
+          <UI.Button
+            onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"])}
+            variant="outlined"
+          >
+            Export CSV
+          </UI.Button>
+        </UI.Row>
       </UI.Row>
       <UI.Text variant="h4">Registrant</UI.Text>
       {/* <RowItem header data={["Name", "Email", "Image", "In Game ID", "Phone number", "status"]} /> */}
@@ -99,6 +119,32 @@ function MainApp({ eid }) {
         options={{ rowEvenColor: "#ffffff", rowOddColor: "#ffffff" }}
       />
     </UI.Col>
+  );
+}
+
+function Reconfirm({ onCancel, onOk }) {
+  return (
+    <UI.Modal open>
+      <UI.Col
+        sx={{
+          bgcolor: "white",
+          color: "black",
+          p: 2,
+          minWidth: 480,
+          gap: 2,
+        }}
+        center
+      >
+        <UI.Text variant="h4">Are you sure ? </UI.Text>
+        <UI.Text variant="body1">All current listed registrant will deleted </UI.Text>
+        <UI.Row gap={2}>
+          <UI.Button color="error" onClick={onCancel}>
+            cancel
+          </UI.Button>
+          <UI.Button onClick={onOk}>continue</UI.Button>
+        </UI.Row>
+      </UI.Col>
+    </UI.Modal>
   );
 }
 

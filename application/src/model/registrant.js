@@ -6,6 +6,7 @@ export const registrant = {
     { name: "email", label: "Email", w: 200 },
     // { name: "images", label: "Images", w: 200, type: "images" },
     { name: "ingame_id", label: "In Game ID", w: 200 },
+    { name: "nickname", label: "Nickname", w: 200 },
     { name: "no_hp", label: "Phone", w: 200 },
     { name: "status", label: "Status", w: "auto" },
   ],

@@ -70,9 +70,9 @@ function MainApp({ eid }) {
   }
 
   async function handleExportDelete() {
-    exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"]);
+    exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "email", "no_hp", "tournament_date", "status", "img"]);
     let res = await fetcher({
-      url: "/registrant/clear",
+      url: "registrant/clear",
       method: "post",
       data: {
         event_id: eid,
@@ -98,7 +98,9 @@ function MainApp({ eid }) {
             Export and Delete
           </UI.Button>
           <UI.Button
-            onClick={() => exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "email", "no_hp", "tournament_date", "status", "img"])}
+            onClick={() =>
+              exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "email", "no_hp", "tournament_date", "status", "img"])
+            }
             variant="outlined"
           >
             Export CSV

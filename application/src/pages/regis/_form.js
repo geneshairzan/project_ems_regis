@@ -108,8 +108,8 @@ export default function App({ refdata, loc, event }) {
         <Label l="UID" />
         <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} />
 
-        {/* <Label l="Ingame ID" />
-        <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} /> */}
+        <Label l="Nickname / Ingame Name" />
+        <Form.Text name="nickname" value={formik.values.nickname} onChange={formik.handleChange} />
         {/* 
         <UI.Stack
           sx={{

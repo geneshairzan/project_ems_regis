@@ -72,6 +72,12 @@ function FormRegis({ id }) {
             py: 4,
           }}
         >
+          <UI.Text variant="h2" align="center" bold>
+            MCGG Challenger
+          </UI.Text>
+          <UI.Text variant="h4" align="center" bold>
+            Offline @MPL Arena
+          </UI.Text>
           <Form loc={loc.data} event={event?.data} />
         </UI.Col>
       </UI.Col>

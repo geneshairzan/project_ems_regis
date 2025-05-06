@@ -10,7 +10,7 @@ export default function App({ data }) {
   const handleChange = (event, value) => setPage(value);
   const startIndex = (page - 1) * itemsPerPage;
 
-  let dataPrep = data?.standing_json.map((d, ix) => ({ ...d, no: ix + 1 })).sort((a, b) => (a.point < b.point ? 1 : -1));
+  let dataPrep = data?.standing_json.sort((a, b) => (a.point < b.point ? 1 : -1)).map((d, ix) => ({ ...d, no: ix + 1 }));
 
   return (
     <UI.Col

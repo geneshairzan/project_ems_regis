@@ -13,9 +13,9 @@ export const filedelete = async (path) => {
 };
 
 export const upload = async (file, newfilename, storage = "public") => {
-  if (newfilename) {
-    newfilename = newfilename + getExt(file.originalFilename);
-  }
+  // if (newfilename) {
+  //   newfilename = newfilename + getExt(file.originalFilename);
+  // }
   const dir = path.resolve(`storage/upload/${storage}`);
 
   if (!fs.existsSync(dir)) {

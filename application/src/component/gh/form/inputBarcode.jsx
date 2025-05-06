@@ -33,14 +33,9 @@ export default function App({ onChange, triggerEl, noLabel = false, size, ...pro
         )}
       </UI.Row>
       <UI.Modal open={onScan} onClose={() => setonScan(false)}>
-        {/* <QrReader onError={(err) => console.log(err)} onScan={handleScan} /> */}
         <UI.Col sx={{ width: "100vw", height: "100dvh" }} bgcolor="black">
           <UI.Row justifyContent="flex-end">
-            <Switch
-              checked={isFront}
-              onChange={(e) => setisFront(!isFront)}
-              inputProps={{ "aria-label": "controlled" }}
-            />
+            <Switch checked={isFront} onChange={(e) => setisFront(!isFront)} inputProps={{ "aria-label": "controlled" }} />
           </UI.Row>
           <QrReader
             containerStyle={{ width: "100vw", height: "100dvh" }}

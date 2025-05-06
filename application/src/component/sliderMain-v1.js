@@ -13,7 +13,6 @@ export default function App({ data, height = 640 }) {
   const splideRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const { r } = React.useContext(Context);
-  console.log(data);
 
   useEffect(() => {
     // Add event listener to update the current slide index when slides change

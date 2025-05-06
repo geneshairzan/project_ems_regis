@@ -1,6 +1,7 @@
 import UI from "@gh/ui";
 import { useEffect, useRef, useState } from "react";
 import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
+import RemoteImg from "@/component/remoteImg";
 
 export default function InputImage({ onChange, error, helperText, sx, noLabel = false, label = "Lampiran", value, multiple = false, ...props }) {
   const inputRef = useRef();
@@ -88,7 +89,17 @@ function Preview({ value, onDelete }) {
               height: "112px",
             }}
           >
-            <img src={getLink(d)} alt="Preview" style={{ height: "100%", width: "100%", objectFit: "cover" }} />
+            <RemoteImg
+              src={getLink(d)}
+              style={{
+                height: "100%",
+                width: "100%",
+                objectFit: "cover",
+                objectPosition: "bottom",
+              }}
+            />
+
+            {/* <img src={getLink(d)} alt="Preview" style={{ height: "100%", width: "100%", objectFit: "cover" }} /> */}
             <UI.Col
               onClick={() => onDelete(d._tid)}
               sx={{

@@ -53,7 +53,6 @@ export default function App({ data }) {
           </>
         )}
 
-        {console.log(data)}
         <UI.Col id="REGISTRATION">{isVisible() && <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>}</UI.Col>
       </UI.Col>
     </UI.Col>

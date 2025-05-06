@@ -41,7 +41,6 @@ const handler = async (r, res) => {
 
       if (raw?.file) {
         let path = await upload(raw?.file, `${raw?.file.newFilename}_${raw?.file.originalFilename}`, raw.ownerType);
-
         await extendPrisma.Attachment.create({
           data: {
             name: raw?.file.originalFilename,

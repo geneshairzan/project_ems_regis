@@ -27,7 +27,6 @@ export default function App({ value, onChange }) {
           data={value}
           setData={(e) => {
             onChange(e);
-            console.log(e);
           }}
         />
       )}

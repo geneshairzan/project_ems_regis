@@ -21,8 +21,6 @@ const extendPrisma = prisma.$extends({
 });
 
 async function main() {
-  console.log(data);
-
   data.forEach(async (d) => {
     await extendPrisma.user.create({
       data: {

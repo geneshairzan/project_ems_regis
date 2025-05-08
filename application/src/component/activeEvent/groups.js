@@ -53,7 +53,7 @@ export default function App({ data }) {
           </>
         )}
 
-        <UI.Col id="REGISTRATION">{isVisible() && <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now !</MainButton>}</UI.Col>
+        <UI.Col id="REGISTRATION">{isVisible() ? <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now!</MainButton>:<MainButton disabled={true} onClick={() => r.push(`javascript:void(0)`)} is_disabled={() => true}>Registration Closed</MainButton>}</UI.Col>
       </UI.Col>
     </UI.Col>
   );

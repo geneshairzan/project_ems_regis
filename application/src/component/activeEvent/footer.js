@@ -17,6 +17,27 @@ export default function App({ data }) {
       }}
       center
     >
+      <div style={{marginBottom: "10px",}}>
+        <a style={{marginRight: "12px",}} href="https://facebook.com/profile.php?id=61567078887192">
+          <img height="33px" src="/assets/img/Facebook_Logo_Primary.png"></img>
+        </a>
+
+        <a style={{marginRight: "12px",}} href="https://instagram.com/magicchessgogoid">
+          <img height="33px" src="/assets/img/Instagram_logo_2022.svg"></img>
+        </a>
+
+        <a style={{marginRight: "12px",}} href="https://tiktok.com/@playmagicchessgogoid">
+          <img height="33px" src="/assets/img/tiktok-logo.svg"></img>
+        </a>
+
+        <a style={{marginRight: "12px",}} href="https://www.youtube.com/@MagicChessGoGoIDOfficial">
+          <img height="33px" src="/assets/img/x-logo.svg"></img>
+        </a>
+
+        <a href="https://www.youtube.com/@MagicChessGoGoIDOfficial">
+          <img height="33px" src="/assets/img/yt-logo.svg"></img>
+        </a>
+      </div>
       <MainButton
         onClick={() => {
           window.open("https://app.adjust.com/1iqg4h10_1ige6nfm?campaign=MCCTID&deeplink=mobilechess%3A%2F%2Fappinvites", "_blank");
@@ -40,6 +61,7 @@ export default function App({ data }) {
             alt=""
             style={{
               // objectFit: "cover",
+              marginTop: "10px",
               height: "100%",
               width: "auto",
             }}

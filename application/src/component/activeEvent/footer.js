@@ -30,7 +30,7 @@ export default function App({ data }) {
           <img height="33px" src="/assets/img/tiktok-logo.svg"></img>
         </a>
 
-        <a style={{marginRight: "12px",}} href="https://www.youtube.com/@MagicChessGoGoIDOfficial">
+        <a style={{marginRight: "12px",}} href="https://x.com/MCGG_ID">
           <img height="33px" src="/assets/img/x-logo.svg"></img>
         </a>
 

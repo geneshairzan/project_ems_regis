@@ -9,7 +9,7 @@ export default function App(props) {
 
   if (!r.query?.id) return;
   return (
-    <UI.Col width="100%">
+    <UI.Col style={{backgroundColor: "#1A1B1F",}} width="100%">
       <FormRegis id={r.query?.id} />
     </UI.Col>
   );
@@ -22,6 +22,7 @@ function FormRegis({ id }) {
   let loc = useFetch({ url: `data/location?_token=223344!!` });
   return (
     <UI.Col
+    style={{backgroundColor: "#1A1B1F",}}
       sx={{
         position: "relative",
         mb: "50px",
@@ -95,7 +96,7 @@ function BG(params) {
       }}
     >
       <img
-        src="/assets/img/standing-bg.png"
+        src="/assets/img/MCCTS2KV.jpg"
         alt=""
         style={{
           width: "100%",

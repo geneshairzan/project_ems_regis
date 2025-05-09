@@ -168,7 +168,7 @@ export default function App({ refdata, loc, event }) {
         <UI.Row alignItems="center">
           <Form.Checkbox value={formik.values.tc} onChange={() => formik.setFieldValue("tc", !formik.values.tc)} />
           <UI.Text variant="body1">
-            {`Saya setuju dengan syarat dan ketentuan tournament `}
+            {` Dengan mengisi form ini saya menyatakan bahwa saya warga negara Indonesia dan berusia diatas 16 tahun, serta setuju dengan `}
             <UI.Text
               component="a"
               // href={`https://mcggesports.id/events?id=${event?.id}#RULES`}
@@ -179,7 +179,7 @@ export default function App({ refdata, loc, event }) {
                 textDecoration: "underline",
               }}
             >
-              {`Syarat & Ketentuan.`}
+              {`Syarat & Ketentuan turnamen.`}
             </UI.Text>
           </UI.Text>
         </UI.Row>

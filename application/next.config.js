@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: "export",
-  experimental: {
-    serverComponentsExternalPackages: ["@react-email/components", "@react-email/render", "@react-email/tailwind"],
-  },
+  output: "export",
+  // experimental: {
+  //   serverComponentsExternalPackages: ["@react-email/components", "@react-email/render", "@react-email/tailwind"],
+  // },
   // async headers() {
   //   return [
   //     {

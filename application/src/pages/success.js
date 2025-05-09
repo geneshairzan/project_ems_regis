@@ -27,7 +27,7 @@ export default function App(props) {
             <img height="53px" src="/assets/img/tiktok-logo.svg"></img>
           </a>
 
-          <a style={{marginRight: "12px",padding: "10px", paddingTop: "50px", borderRadius:"20px" ,backgroundColor: "rgba(0,0,0,.2)"}} href="https://www.youtube.com/@MagicChessGoGoIDOfficial">
+          <a style={{marginRight: "12px",padding: "10px", paddingTop: "50px", borderRadius:"20px" ,backgroundColor: "rgba(0,0,0,.2)"}} href="https://x.com/MCGG_ID">
             <img height="53px" src="/assets/img/x-logo.svg"></img>
           </a>
 

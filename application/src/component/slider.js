@@ -16,7 +16,9 @@ export default function App({ data }) {
 
   var settings = {
     infinite: true,
-    speed: 500,
+    speed: 0,
+    arrows:false,
+    dots: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
@@ -35,8 +37,8 @@ export default function App({ data }) {
         {data?.map((d, ix) => (
           <UI.Col
             sx={{
-              height: isMobile ? 400 : "calc(100vh - 220px)",
-              minHeight: isMobile ? 0 : 720,
+              // height: isMobile ? 400 : "calc(100vh - 220px)",
+              // minHeight: isMobile ? 0 : 720,
               flexShrink: 0,
             }}
             key={ix}
@@ -44,7 +46,6 @@ export default function App({ data }) {
             <RemoteImg
               src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d.path}`}
               style={{
-                height: "100%",
                 width: "100%",
                 objectFit: "cover",
                 objectPosition: "bottom",
@@ -96,7 +97,7 @@ export default function App({ data }) {
               borderRadius: "16px",
               transition: "width 0.5s ease-in-out",
               ...(ix == currentSlide && {
-                bgcolor: "#e8b931",
+                bgcolor: "transparent",
                 width: 170,
               }),
             }}

@@ -17,6 +17,8 @@ export default function SimpleSlider({ data }) {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
+    arrows:false,
+    dots: false,
     slidesToScroll: 1,
     adaptiveHeight: true,
     autoplay: true,
@@ -29,7 +31,6 @@ export default function SimpleSlider({ data }) {
         flexShrink: 0,
         position: "relative",
         bgcolor: "#0f122b",
-        pt: "80px",
       }}
     >
       <Slider {...settings} beforeChange={(oldIx, newIx) => setactiveEvent(newIx)}>
@@ -37,7 +38,6 @@ export default function SimpleSlider({ data }) {
           <UI.Col
             key={ix}
             sx={{
-              height: isMobile ? 400 : "calc(100vh - 220px)",
               minHeight: isMobile ? 0 : 720,
               flexShrink: 0,
             }}
@@ -45,7 +45,6 @@ export default function SimpleSlider({ data }) {
             <RemoteImg
               src={`${process.env.NEXT_PUBLIC_ASSET_URL}/api/file/event/${d?.img?.path}`}
               style={{
-                height: "100%",
                 width: "100%",
                 objectFit: "cover",
               }}

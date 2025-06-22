@@ -15,6 +15,21 @@ export default function RegistrantList(params) {
   return <MainApp eid={r.query.eid} />;
 }
 
+function getCurrentDateTimeString() {
+  const now = new Date();
+
+  const pad = (num) => num.toString().padStart(2, '0');
+
+  const year = now.getFullYear();
+  const month = pad(now.getMonth() + 1); // Months are zero-based
+  const day = pad(now.getDate());
+  const hours = pad(now.getHours());
+  const minutes = pad(now.getMinutes());
+  const seconds = pad(now.getSeconds());
+
+  return `${year}${month}${day}_${hours}${minutes}${seconds}`;
+}
+
 const exportToCSV = (data, filterKeys) => {
   // Extract only selected keys from data
   const filteredData = data.map((obj) => Object.fromEntries(filterKeys.map((key) => [key, obj[key]])));
@@ -36,7 +51,7 @@ const exportToCSV = (data, filterKeys) => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "filtered_data.csv";
+  link.download = "registrant-data-"+getCurrentDateTimeString()+".csv";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -70,7 +85,7 @@ function MainApp({ eid }) {
   }
 
   async function handleExportDelete() {
-    exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "email", "no_hp", "tournament_date", "status", "img"]);
+    exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "rank", "email", "no_hp", "tournament_date", "status", "img"]);
     let res = await fetcher({
       url: "registrant/clear",
       method: "post",
@@ -99,7 +114,7 @@ function MainApp({ eid }) {
           </UI.Button>
           <UI.Button
             onClick={() =>
-              exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "email", "no_hp", "tournament_date", "status", "img"])
+              exportToCSV(registrant?.data.map(exportMap), ["name", "ingame_id", "nickname", "rank", "email", "no_hp", "tournament_date", "status", "img"])
             }
             variant="outlined"
           >
@@ -229,10 +244,10 @@ function Preview({ data, event, ranks, loc, onClose, onReload }) {
       <PreviewItem label="Nama Lengkap" value={data?.name} />
       {/* <PreviewItem label="Tanggal Lahir" value={h.date.format(data.dob)} /> */}
       {/* <PreviewItem label="Lokasi" value={loc.kabupaten.find((d) => d.id == data.kabupaten_id)?.name} /> */}
-      {/* <PreviewItem label="Nick Name" value={data?.nickname} /> */}
+      <PreviewItem label="Nick Name" value={data?.nickname} />
       <PreviewItem label="Ingame ID" value={data?.ingame_id} />
       <PreviewItemLink label="No. HP/WA" value={data?.no_hp} />
-      {/* <PreviewItem label="Rank" value={ranks[parseInt(data.rank)].name || "dasdasd"} /> */}
+      <PreviewItem label="Rank" value={data?.rank} />
       <PreviewItem label="Tournament Date" value={event?.tanggal_options[parseInt(data.tournament_date)] || "dasdasd"} />
       <PreviewItem label="Attachement" value={""} />
 

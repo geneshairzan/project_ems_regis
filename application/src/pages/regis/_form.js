@@ -10,6 +10,20 @@ import MainButton from "@/component/app/mainButton";
 import RemoteImg from "@/component/remoteImg";
 
 export default function App({ refdata, loc, event }) {
+  const tourneyDateOpt = event?.tanggal_options?.map((d, ix) => ({
+            id: ix,
+            name: d,
+          }))
+  const rankOpt = [
+            { id: 1, name: "Warrior" },
+            { id: 2, name: "Elite" },
+            { id: 3, name: "Master" },
+            { id: 4, name: "Grandmaster" },
+            { id: 5, name: "Epic" },
+            { id: 6, name: "Legend" },
+            { id: 7, name: "Mythic" },
+            { id: 8, name: "Mythical Honor" },
+          ]
   const [error, setError] = useState(false);
   const [isDuplicate, setisDuplicate] = useState(false);
   const { r } = React.useContext(Context);
@@ -38,6 +52,7 @@ export default function App({ refdata, loc, event }) {
     initialValues: refdata || { sk: false, tc: false },
     // validationSchema: validationSchema,
     onSubmit: async (payload) => {
+      payload.rank = rankOpt[payload.rank-1].name
       // console.log(payload);
       let res = await fetcher({
         url: `registrant`,
@@ -75,6 +90,10 @@ export default function App({ refdata, loc, event }) {
     return true;
   }
 
+  if (formik.values.tournament_date == undefined)
+    formik.values.tournament_date = tourneyDateOpt?.[0].id
+  if (formik.values.rank == undefined)
+    formik.values.rank = rankOpt?.[0].id
   return (
     <UI.Col center maxWidth="920px" width="100%" position="relative" px={2}>
       <UI.Col
@@ -109,7 +128,7 @@ export default function App({ refdata, loc, event }) {
         <Form.Text name="game_id" value={formik.values.game_id} onChange={formik.handleChange} />
 
         <Label l="Nickname / Ingame Name" />
-        <Form.Text name="nickname" value={formik.values.nickname} onChange={formik.handleChange} />
+        <Form.Text name="name_nick" value={formik.values.name_nick} onChange={formik.handleChange} />
         {/* 
         <UI.Stack
           sx={{
@@ -126,31 +145,24 @@ export default function App({ refdata, loc, event }) {
           <InputPhoto data={photoinput[1]} value={formik.values.photo_id_path} onChange={(e) => formik.setFieldValue("photo_id_path", e)} />
         </UI.Stack> */}
 
-        {/* <Label l="Rank" />
+        <Label l="Rank" />
         <Form.Select
-          options={[
-            { id: 1, name: "Legend" },
-            { id: 2, name: "Mytic" },
-            { id: 3, name: "Mytic Glory" },
-          ]}
+          options={rankOpt}
           label="Rank"
           name="rank"
-          value={formik.values.rank}
+          value={formik.values?.rank}
           onChange={formik.handleChange}
-        /> */}
+        />
         <UI.Col center>
           <InputPhoto data={photoinput[2]} value={formik.values.photo_ss_path} onChange={(e) => formik.setFieldValue("photo_ss_path", e)} />
           <Sample />
         </UI.Col>
 
         <Form.Select
-          options={event?.tanggal_options?.map((d, ix) => ({
-            id: ix,
-            name: d,
-          }))}
+          options={tourneyDateOpt}
           label="Tournament Date"
           name="tournament_date"
-          value={formik.values.tournament_date}
+          value={formik.values?.tournament_date}
           onChange={formik.handleChange}
         />
       </UI.Col>

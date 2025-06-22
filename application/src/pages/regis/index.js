@@ -22,7 +22,7 @@ function FormRegis({ id }) {
   let loc = useFetch({ url: `data/location?_token=223344!!` });
   return (
     <UI.Col
-    style={{backgroundColor: "#1A1B1F",}}
+    style={{backgroundColor: "#000",}}
       sx={{
         position: "relative",
         mb: "50px",

@@ -17,6 +17,14 @@ export default function App({ data }) {
     const end = new Date(data.end);
     return now >= start && now <= end;
   };
+  const registrationOption = () => {
+    const now = new Date();
+    const start = new Date(data.start);
+    const end = new Date(data.end);
+    if (now < start) return 1;
+    else if (now >= start && now <= end) return 2;
+    else if (now > end) return 3;
+  };
 
   return (
     <UI.Col
@@ -53,7 +61,11 @@ export default function App({ data }) {
           </>
         )}
 
-        <UI.Col id="REGISTRATION">{isVisible() ? <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now!</MainButton>:<MainButton disabled={true} onClick={() => r.push(`javascript:void(0)`)} is_disabled={() => true}>Registration Closed</MainButton>}</UI.Col>
+        <UI.Col id="REGISTRATION">
+          {registrationOption() == 2 ? <MainButton onClick={() => r.push(`/regis?id=${data?.id}`)}>Join Now!</MainButton>:<span></span>}
+          {registrationOption() == 1 ? <MainButton disabled={true} onClick={() => r.push(`javascript:void(0)`)} is_disabled={() => true}>Coming Soon</MainButton>:<span></span>}
+          {registrationOption() == 3 ? <MainButton disabled={true} onClick={() => r.push(`javascript:void(0)`)} is_disabled={() => true}>Registration Closed</MainButton>:<span></span>}
+        </UI.Col>
       </UI.Col>
     </UI.Col>
   );

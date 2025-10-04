@@ -18,7 +18,7 @@ import Header from "../activeEvent/header";
 export default function App(props) {
   const { r } = React.useContext(Context);
   const [activeEvent, setactiveEvent] = useState(0);
-/ Adjust breakpoint as needed
+  // / Adjust breakpoint as needed
 
   let events = useFetch({
     url: "event",

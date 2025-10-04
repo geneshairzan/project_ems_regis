@@ -10,21 +10,6 @@ export default function App({ events, activeEvent, setactiveEvent, selector = tr
   let menus = ["STANDINGS", "LIVE", "RULES", "GROUPS", "REGISTRATION"];
   return (
     <>
-      <UI.Col
-        sx={{
-          display: { xs: "none", md: "flex" },
-        }}
-      >
-        comp mobile
-      </UI.Col>
-      <UI.Col
-        sx={{
-          display: { xs: "none", md: "flex" },
-        }}
-      >
-        comp dekstop
-      </UI.Col>
-
       <UI.Row
         sx={{
           width: "100%",

@@ -101,7 +101,7 @@ export default function App({ data }) {
               borderRadius: "16px",
               transition: "width 0.5s ease-in-out",
               ...(ix == currentSlide && {
-                bgcolor: "#e8b931",
+                bgcolor: "transparent",
                 width: 170,
               }),
             }}

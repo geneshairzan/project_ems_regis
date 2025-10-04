@@ -9,7 +9,7 @@ export default function App(props) {
 
   if (!r.query?.id) return;
   return (
-    <UI.Col width="100%">
+    <UI.Col style={{backgroundColor: "#1A1B1F",}} width="100%">
       <FormRegis id={r.query?.id} />
     </UI.Col>
   );
@@ -20,9 +20,9 @@ function FormRegis({ id }) {
 
   let event = useFetch({ url: `event/${id}` });
   let loc = useFetch({ url: `data/location?_token=223344!!` });
-
   return (
     <UI.Col
+    style={{backgroundColor: "#000",}}
       sx={{
         position: "relative",
         mb: "50px",
@@ -73,10 +73,10 @@ function FormRegis({ id }) {
           }}
         >
           <UI.Text variant="h2" align="center" bold>
-            MCGG Challenger
+            {event?.data?.name}
           </UI.Text>
           <UI.Text variant="h4" align="center" bold>
-            Offline @MPL Arena
+            {event?.data?.desc}
           </UI.Text>
           <Form loc={loc.data} event={event?.data} />
         </UI.Col>
@@ -96,7 +96,7 @@ function BG(params) {
       }}
     >
       <img
-        src="/assets/img/standing-bg.png"
+        src="/assets/img/MCCTS2KV.jpg"
         alt=""
         style={{
           width: "100%",

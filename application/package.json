@@ -9,7 +9,8 @@
     "start": "next start -p 7004",
     "devserver": "next dev -p 7004",
     "lint": "next lint",
-    "preview-email": "email dev"
+    "preview-email": "email dev",
+    "build-pnpm": "pnpm next build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

@@ -12,7 +12,7 @@ module.exports = {
       name: "project_event_mcgg",
       // script: "npm",
       script: "node_modules/next/dist/bin/next",
-      args: "start -p 7030",
+      args: "start -p 7031",
       watch: true,
       // watch_delay: 1000,
       // ignore_watch: ["node_modules"],
